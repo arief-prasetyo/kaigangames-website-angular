@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper">
+    <div class="container top-container">
+        <div class="row image-container">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 career-benefit" data-aos="fade-up" data-aos-duration="1500">
+                <button class="btn btn-transparent benefitImage" data-bs-toggle="modal" data-bs-target="#benefitsModal">
+                    <span>Benefits</span>
+                    <img src="./assets/frontend/photos/careers/Benefit.webp" class="w-100" alt="Career Benefit" loading="lazy">
+                </button>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 career-benefit" data-aos="fade-up" data-aos-duration="1500">
+                <a routerLink="/about/photos/life-at-kaigangames">
+                    <span>Life at Kaigan</span>
+                    <img src="./assets/frontend/photos/careers/Life at Kaigan.webp" class="w-100" alt="Life at Kaigan" loading="lazy">
+                </a>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 career-benefit" data-aos="fade-up" data-aos-duration="1500">
+                <a routerLink="/career/internship-program">
+                    <span>Internship Programs</span>
+                    <img src="./assets/frontend/photos/careers/Intersnship Program.webp" class="w-100" alt="Internship Program" loading="lazy">
+                </a>
+            </div>
+        </div>
+        <div class="what-we-offer">
+            <div class="d-flex justify-content-center">
+                <div class="col-xl-10 col-lg-8 col-md-8 col-sm-12 col-12" data-aos="fade-up" data-aos-duration="1500">
+                    <h1>WHAT WE OFFER</h1>
+                    <p>
+                        We offer a challenging and rewarding opportunity to work on cutting-edge game development projects using the latest technologies and tools. As part of our team, you'll have the chance to collaborate with talented professionals and contribute to the creation of immersive and engaging gaming experiences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container main-container">
+        <!-- display on xxl - md screen -->
+        <div class="d-none d-xxl-block d-xl-block d-lg-block d-md-block" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="title">open position</h1>
+            <table class="table table-secondary  table-bordered mb-0">
+                <thead class="custom-table-head">
+                    <tr class="career-detail">
+                        <th scope="col">JOB TITLE</th>
+                        <th scope="col">LOCATION</th>
+                        <th scope="col">POSITION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of OpenPositionData; index as i; trackBy: trackByFn" (click)="clickLink(data.id)" class="career-detail">
+                        <td>{{data.job_title}}</td>
+                        <td>{{data.job_location}}</td>
+                        <td>{{data.type_of_work_contract}}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <!-- display on sm -->
+        <div class="d-none d-sm-block d-md-none" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="title">open position</h1>
+            <table class="table table-secondary table-bordered mb-0">
+                <thead class="custom-table-head">
+                    <tr class="career-detail">
+                        <th scope="col">JOB TITLE</th>
+                        <th scope="col">POSITION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of OpenPositionData; index as i; trackBy: trackByFn" (click)="clickLink(data.id)" class="career-detail">
+                        <td>{{data.job_title}}</td>
+                        <td>{{data.type_of_work_contract}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- display on xs -->
+        <div class="d-block d-sm-none" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="title">open position</h1>
+            <table class="table table-secondary table-bordered mb-0">
+                <thead class="custom-table-head">
+                    <tr class="career-detail">
+                        <th scope="col">JOB TITLE</th>
+                        <th scope="col">POSITION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of OpenPositionData; index as i; trackBy: trackByFn" (click)="clickLink(data.id)" class="career-detail">
+                        <td>{{data.job_title}}</td>
+                        <td>{{data.type_of_work_contract}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="benefitsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="benefitsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-block">
+                <div class="text-center">
+                    <h1 class="modal-title fs-5" id="benefitsModalLabel">Benefits in Kaigan Games</h1>
+                    <p>Kaigan Games Offers an Exciting Benefit to Join Their Ranks</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 benefit-card" *ngFor="let item of BenefitPerksData; index as i; trackBy: trackByFn" (mouseover)="hoverImage(i)" (mouseout)="backNormal(i)">
+                        <div class="card pb-4">
+                            <span class="d-flex justify-content-center benefit-icon mt-3">
+                                <img src="https://new-rest.kaigangames.com{{item.icon_path}}" class="w-50 normalImage-{{i}}" id="normalImage" alt="Normal Item">
+                                <img src="https://new-rest.kaigangames.com{{item.iconHover_path}}" alt="Hover Item" class="hide w-50 hoverImage-{{i}}" id="hoverImage">
+                            </span>
+
+                            <p class="h5 text-center pt-3">{{item.icon_description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

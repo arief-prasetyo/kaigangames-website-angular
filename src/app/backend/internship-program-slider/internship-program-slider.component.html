@@ -1,0 +1,112 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Internship</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Internship</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Slider</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addSlider">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add Internship Slider
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableInternshipData">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Image</th>
+                                            <th>Image Path</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of internshipData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.image}}</td>
+                                            <td>{{data.image_path}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id, data.image)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!-- Create Modal -->
+    <div class="modal fade" id="addSlider" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Internship Slider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <div class="modal-body text-white">
+                        <div class="col-lg-12 mt-3">
+                            <label for="image" class="form-label">Internship Slider</label>
+                            <input type="file" accept="image/*" class="form-control" id="image" name="image" [(ngModel)]="IS.image" (change)="selectFile($event)" required/>
+                        </div>   
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal">Save Internship Slider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

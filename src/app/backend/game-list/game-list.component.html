@@ -1,0 +1,427 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Games</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Games</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Game List</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addGame">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add New Game
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableGameList">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Game Name</th>
+                                            <th>Game Year</th>
+                                            <th>Game Platform</th>
+                                            <th>Game Rating</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of gameListData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.game_name}}</td>
+                                            <td>{{data.game_year}}</td>
+                                            <td>{{data.game_platform}}</td>
+                                            <td>{{data.game_rating}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary me-2"  data-bs-toggle="modal" data-bs-target="#detailGame" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faSearch"></fa-icon>
+                                                    Detail
+                                                </a>
+                                                <button class="btn btn-sm btn-danger" (click)="confirmBox(data.id, data.game_image)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="addGame" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Game</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div class="modal-body text-white">
+                            <div class="col-md-12 mb-2">
+                                <label for="gameName" class="form-label">Game Name</label>
+                                <input type="text" class="form-control" id="game_name" name="game_name" [(ngModel)]="gameList.game_name" placeholder="Game Name ..." required>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-lg-6 col-md-6">
+                                    <label for="gameName" class="form-label">Game Platform</label>
+                                    <!-- <input type="text" class="form-control" id="game_platform" name="game_platform" [(ngModel)]="gameList.game_platform" placeholder="Game Platform ..." required> -->
+                                    <tag-input class="form-control" id="game_platform" name="game_platform" theme='bootstrap' [(ngModel)]="gameList.game_platform" placeholder="Game Platform ..." required></tag-input>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <label for="gameName" class="form-label">Game Year</label>
+                                    <input type="number" class="form-control" id="game_year" name="game_year" [(ngModel)]="gameList.game_year" placeholder="Game Year ..." required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <label for="gameName" class="form-label">Game Rating</label>
+                                    <select class="form-select" aria-label="Default select example" id="game_rating" name="game_rating" [(ngModel)]="gameList.game_rating" required>
+                                        <option value="ESRB">ESRB</option>
+                                        <option value="PEGI">PEGI</option>                                    
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div id="esrb-rating" style="display: none;">
+                                        <label for="rating" class="form-label mb-2">ESRB Rating</label>
+                                        <select class="form-select" name="esrb_rating" id="esrb_rating" [(ngModel)]="gameList.esrb_rating" required>
+                                            <option value="" selected>- Select Rating -</option>
+                                            <option value="Everyone">Everyone</option>
+                                            <option value="Everyone 10">Everyone 10</option>
+                                            <option value="Teen">Teen</option>
+                                            <option value="Mature">Mature</option>
+                                        </select>
+                                    </div>
+                                    <div id="pegi-rating" style="display: none;">
+                                        <label for="rating" class="form-label mb-2">PEGI Rating</label>
+                                        <select class="form-select" name="pegi_rating" id="pegi_rating" [(ngModel)]="gameList.pegi_rating" required>
+                                            <option value="" selected>- Select Rating -</option>
+                                            <option value="Pegi 3">PEGI 3</option>
+                                            <option value="Pegi 7">PEGI 7</option>
+                                            <option value="Pegi 12">PEGI 12</option>
+                                            <option value="Pegi 16">PEGI 16</option>
+                                            <option value="Pegi 18">PEGI 18</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-2" id="pegi-content-descriptor" style="display: none;">
+                                <label for="PEGI-CD" class="form-label mt-2">PEGI Content Descriptor</label>
+                                <select class="form-select" multiple aria-label="multiple select example" name="pegi_cd" id="pegi_cd" [(ngModel)]="gameList.pegi_cd">
+                                    <option selected>Select Content PEGI Descriptor</option>
+                                    <option value="Violence">Violence</option>
+                                    <option value="Bad Language">Bad Language</option>
+                                    <option value="Fear">Fear</option>
+                                    <option value="Gambling">Gambling</option>
+                                    <option value="Sex">Sex</option>
+                                    <option value="Drugs">Drugs</option>
+                                    <option value="Discrimination">Discrimination</option>
+                                  </select>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label for="Game Description" class="form-label">Game Description</label>
+                                <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="game_description"
+                                required
+                                [(ngModel)]="gameList.game_description"
+                                name="game_description"></editor>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="gameName" class="form-label">Game Media</label>
+                                <select class="form-select" aria-label="Default select example" id="media" name="media" [(ngModel)]="gameList.media" required>
+                                    <option value="Youtube">Youtube</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="gameName" class="form-label">Media Embed URL (Make sure remove width and change with class="w-100" and height="450")</label>
+                                <input type="url" class="form-control" id="URI" name="URI" [(ngModel)]="gameList.URI" placeholder="Media URL ..." required>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <div class="col-lg-6 col-md-6">
+                                    <label for="gameName" class="form-label">Game Image</label>
+                                    <input type="file" accept="image/*" id="game_image" name="game_image" [(ngModel)]="gameList.game_image" (change)="selectFile($event)"/>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-center">
+                                <img [src]="preview" class="preview">
+                            </div>
+                            <div *ngIf="currentFile && progress" class="progress my-3">
+                                <div
+                                  class="progress-bar progress-bar-info"
+                                  role="progressbar"
+                                  attr.aria-valuenow="{{ progress }}"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                  [ngStyle]="{ width: progress + '%' }">
+                                  {{ progress }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                            <button
+                                class="btn btn-dark btn-sm"
+                                data-bs-dismiss="modal">Save Game</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <!-- detail modal -->
+    <div class="modal fade" id="detailGame" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Game Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <div class="row mb-2">
+                            <div class="col-lg-8"></div>
+                            <div class="col-lg-4">
+                                <img src="https://new-rest.kaigangames.com{{editGameListForm.image_path}}" class="w-100" alt="Game Image">
+                            </div>
+                        </div>
+                        <li class="list-group-item" style="border-left-style: none; border-right-style: none;">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Name</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editGameListForm.game_name}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="border-left-style: none; border-right-style: none;">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Year</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editGameListForm.game_year}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="border-left-style: none; border-right-style: none;">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Platform</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editGameListForm.game_platform}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Description</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.game_description| htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Rating</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.game_rating| htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">ESRB Rating</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.esrb_rating | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">PEGI Rating</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.pegi_rating | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Pegi Content Descriptor</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.pegi_cd| htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Media</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.media | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Game Embed URL</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.URI | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Created At</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editGameListForm.createdAt | date: 'fullDate'"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editGame" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Game Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="col-md-12 mb-2">
+                        <label for="gameName" class="form-label">Game Name</label>
+                        <input type="text" class="form-control" id="game_name" name="game_name" #game_name="ngModel" [(ngModel)]="editGameListForm.game_name" placeholder="Game Name ..." required>
+                    </div>
+                    <div class="row mb-2">
+                        <!-- <div class="col-lg-6 col-md-6">
+                            <label for="gameName" class="form-label">Game Platform</label>
+                            <tag-input class="form-control" id="game_platform" name="game_platform" theme='bootstrap' #game_platform="ngModel" [(ngModel)]="editGameListForm.game_platform" placeholder="Game Platform ..." disabled></tag-input>
+                        </div> -->
+                        <div class="col-lg-12 col-md-12">
+                            <label for="gameName" class="form-label">Game Year</label>
+                            <input type="number" class="form-control" id="game_year" name="game_year" #game_year="ngModel" [(ngModel)]="editGameListForm.game_year" placeholder="Game Year ..." required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="gameName" class="form-label">Game Rating</label>
+                            <select class="form-select" aria-label="Default select example" id="game_rating_edit" name="game_rating" #game_rating="ngModel" [(ngModel)]="editGameListForm.game_rating" required>
+                                <option value="ESRB">ESRB</option>
+                                <option value="PEGI">PEGI</option>                                    
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div id="esrb-rating" style="display: none;">
+                                <label for="rating" class="form-label mb-2">ESRB Rating</label>
+                                <select class="form-select" name="esrb_rating" id="esrb_rating_edit" #esrb_rating="ngModel" [(ngModel)]="editGameListForm.esrb_rating" required>
+                                    <option value="" selected>- Select Rating -</option>
+                                    <option value="Everyone">Everyone</option>
+                                    <option value="Everyone 10">Everyone 10</option>
+                                    <option value="Teen">Teen</option>
+                                    <option value="Mature">Mature</option>
+                                </select>
+                            </div>
+                            <div id="pegi-rating" style="display: none;">
+                                <label for="rating" class="form-label mb-2">PEGI Rating</label>
+                                <select class="form-select" name="pegi_rating" id="pegi_rating_edit" #pegi_rating="ngModel" [(ngModel)]="editGameListForm.pegi_rating" required>
+                                    <option value="" selected>- Select Rating -</option>
+                                    <option value="Pegi 3">PEGI 3</option>
+                                    <option value="Pegi 7">PEGI 7</option>
+                                    <option value="Pegi 12">PEGI 12</option>
+                                    <option value="Pegi 16">PEGI 16</option>
+                                    <option value="Pegi 18">PEGI 18</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 mb-2" id="pegi-content-descriptor" style="display: none;">
+                        <label for="PEGI-CD" class="form-label mt-2">PEGI Content Descriptor</label>
+                        <select class="form-select" multiple aria-label="multiple select example" name="pegi_cd" id="pegi_cd_edit" #pegi_cd="ngModel" [(ngModel)]="editGameListForm.pegi_cd">
+                            <option selected>Select Content PEGI Descriptor</option>
+                            <option value="Violence">Violence</option>
+                            <option value="Bad Language">Bad Language</option>
+                            <option value="Fear">Fear</option>
+                            <option value="Gambling">Gambling</option>
+                            <option value="Sex">Sex</option>
+                            <option value="Drugs">Drugs</option>
+                            <option value="Discrimination">Discrimination</option>
+                          </select>
+                    </div>
+                    <div class="col-lg-12 mb-2">
+                        <label for="Game Description" class="form-label">Game Description</label>
+                        <editor 
+                        apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                        [init]="{ plugins: 'lists link image table code help wordcount'}"
+                        id="game_description_edit"
+                        required
+                        #game_description_edit="ngModel"
+                        [(ngModel)]="editGameListForm.game_description"
+                        name="game_description"></editor>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="gameName" class="form-label">Game Image</label><br>
+                            <input type="file" accept="image/*" id="game_image" name="game_image" #game_image="ngModel" [(ngModel)]="editGameListForm.game_image"/>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label for="gameName" class="form-label">Game Media</label>
+                            <select class="form-select" aria-label="Default select example" id="media" name="media" #media="ngModel" [(ngModel)]="editGameListForm.media" required>
+                                <option value="Youtube">Youtube</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="gameName" class="form-label">Media URL (Make sure remove width and change with class="w-100" and height="450")</label>
+                        <input type="url" class="form-control" id="URI" name="URI" #URI="ngModel" [(ngModel)]="editGameListForm.URI" placeholder="Media URL ..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        type="button"
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="updateData(id)">Update Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<!--start switcher-->
+<app-backend-switcher></app-backend-switcher>

@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper">
+    <img src="./assets/frontend/Banner/kaigan-community banner-purple.jpg" class="w-100 community-banner" alt="Community Banner" loading="lazy">
+    <div class="top-section">
+      <div class="container">
+        <h2 class="title mb-3">
+          community
+        </h2>
+        <div class="row mt-5">
+            <div class="col-xl-8 col-lg-6 col-md-6 col-sm-4 col-12 community-wrapper" data-aos="fade-right" data-aos-duration="1500">
+              <p class="description">
+                Community - We've got a community that's been with us from the very beginning! Their love and support have been the secret sauce that's made us who we are today!
+              </p>
+              <p class="description">
+                We've always got something exciting here at Kaigan, from game streams to movie nights on Discord. Make sure to follow us on social media so you don't miss out on our fun updates and events! It's never a dull moment when you're part of the Kaigan community!
+              </p>
+              <div class="d-flex justify-content-center">
+                <a href="https://discord.com/invite/playsimulacra" target="_blank">
+                  <button class="btn btn-primary">JOIN DISCORD</button>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-8 col-12" data-aos="fade-left" data-aos-duration="1500">
+              <iframe src="https://discord.com/widget?id=503573685752430606&theme=dark" loading=lazy class="w-100" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-section" data-aos="fade-up" data-aos-duration="1500">
+      <div class="container">
+        <div *ngIf="CDL > 0">
+          <h2 class="title">Community Highlights</h2>
+        </div>     
+        <div class="row mt-5">
+          <div class="col-lg-4 col-md-4 col-sm-6 ch-box" *ngFor="let item of communityData; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500">
+            <a routerLink="/community/highlight/{{item.id}}/{{item.month | date: 'MMMM-y'}}">
+              <img src="https://new-rest.kaigangames.com{{item.image_path}}" loading=lazy class="w-100" alt="{{item.community_highlight_image}}">
+              <h5 class="mb-3">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 comm-date">
+                    <p style="color: inherit; font-weight: 700; font-size: 14px;">{{item.createdAt | date: "MM/dd/y"}}</p>
+                  </div>
+                  <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 col-12 comm-text">
+                    <p style="color: orangered; font-weight: 700; font-size: 14px;">COMMUNITY</p>
+                  </div>
+                </div>
+                {{item.community_highlight_title}}
+              </h5>
+              <p [innerHTML]="(item.community_highlight_description.length>200)? (item.community_highlight_description | slice:0:200)+'...':(item.community_highlight_description) | htmldata"></p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<app-footer></app-footer>

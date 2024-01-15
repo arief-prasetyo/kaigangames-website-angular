@@ -1,0 +1,191 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Games</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Games</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Game FAQ</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addGameFAQ">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add New Game FAQ
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableGameFAQ">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Game ID</th>
+                                            <th>Game Name</th>
+                                            <th>FAQ Title</th>
+                                            <th>FAQ Content</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of GameFaqData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.game_id}}</td>
+                                            <td>{{data.game_name}}</td>
+                                            <td>{{data.faq_title}}</td>
+                                            <td>{{data.faq_content}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info me-2 w-100"  data-bs-toggle="modal" data-bs-target="#editFAQ" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="addGameFAQ" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Game FAQ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div class="modal-body text-white">
+                            <div id="col-md-12">
+                                <label for="rating" class="form-label mb-2">Game Name</label>
+                                <select class="form-select" name="game_name" id="game_name" [(ngModel)]="GameFaq.game_name" required>
+                                    <option *ngFor="let item of gameListData" value="{{item.id}}{{item.game_name}}">
+                                        {{item.game_name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2">
+                                <label for="FAQQ" class="form-label">FAQ Question</label>
+                                <input type="text" class="form-control" id="faq_title" name="faq_title" [(ngModel)]="GameFaq.faq_title" placeholder="FAQ Question ..." required>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="FAQDT" class="form-label">Data Target</label>
+                                <input type="text" class="form-control" id="faq_data_target" name="faq_data_target" [(ngModel)]="GameFaq.faq_data_target" placeholder="FAQ Data Target ..." required>
+                                <div id="FAQDTHelpBlock" class="form-text text-white">
+                                    For accordion. <span class="badge text-bg-danger"><b>Must unique</b></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="FAQA" class="form-label">FAQ Answer</label>
+                                <textarea class="form-control" placeholder="Leave a answer here" id="job_role"
+                                required
+                                [(ngModel)]="GameFaq.faq_content"
+                                name="job_role"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                            <button
+                                class="btn btn-dark btn-sm"
+                                data-bs-dismiss="modal">Save Game FAQ</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editFAQ" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit FAQ Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div id="col-md-12">
+                        <label for="rating" class="form-label mb-2">Game Name</label>
+                        <select class="form-select" name="game_name" id="game_name" [(ngModel)]="editGameFaqForm.game_name" required>
+                            <option *ngFor="let item of gameListData" value="{{item.id}}{{item.game_name}}">
+                                {{item.game_name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label for="FAQQ" class="form-label">FAQ Question</label>
+                        <input type="text" class="form-control" id="faq_title" name="faq_title" [(ngModel)]="editGameFaqForm.faq_title" placeholder="FAQ Question ..." required>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="FAQDT" class="form-label">Data Target</label>
+                        <input type="text" class="form-control" id="faq_data_target" name="faq_data_target" [(ngModel)]="editGameFaqForm.faq_data_target" placeholder="FAQ Data Target ..." required>
+                        <div id="FAQDTHelpBlock" class="form-text text-white">
+                            For accordion. <span class="badge text-bg-danger"><b>Must unique</b></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="FAQA" class="form-label">FAQ Answer</label>
+                        <textarea class="form-control" placeholder="Leave a answer here" id="job_role"
+                        required
+                        [(ngModel)]="editGameFaqForm.faq_content"
+                        name="job_role"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        type="button"
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="updateData(id)">Update Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<!--start switcher-->
+<app-backend-switcher></app-backend-switcher>

@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper ps-0 pe-0">
+    <img src="./assets/frontend/Banner/Kaigan_ContactUs_Banner.png" loading="lazy" class="w-100 contact-us-banner" alt="Contact Us">
+    <div class="container wrapper-contact">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 left-section" data-aos="fade-up" data-aos-duration="1500">
+                <h2>
+                    Hi! Got a message for us?
+                </h2>
+                <p>
+                    Get in touch with us using the contact form. If you have any questions, concerns or feedback, please don't hesitate to contact us.
+                </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 right-section" data-aos="fade-up" data-aos-duration="1500">
+                <form #form="ngForm">
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" [(ngModel)]="ContactUs.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" [(ngModel)]="ContactUs.email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputSubject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="inputSubject" aria-describedby="subjectHelp" [(ngModel)]="ContactUs.website">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-6 col-12">
+                            <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" class="w-100" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+                            <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback w-100">
+                                <div *ngIf="recaptcha.errors?.['required']">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-6 col-12 wrapper-btn">
+                            <button type="button" class="btn btn-secondary w-100 fw-bold" (click)="send(form)">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

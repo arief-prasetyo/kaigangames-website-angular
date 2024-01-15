@@ -1,0 +1,146 @@
+<body class="bg-theme bg-theme2">
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container-fluid">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+					<div class="col mx-auto">
+						<div class="mb-4 text-center">
+							<img src="/assets/logo/Kaigan-logo-RGB.webp" width="180" alt="" />
+						</div>
+						<div class="card" >
+							<div class="card-body">
+								<div class="border p-4 rounded">
+									<div class="text-center">
+										<h3 class="">SIGN UP</h3>
+									</div>
+									<div class="form-body">
+										<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+											<div class="col-12 mb-3">
+												<label for="inputUsername" class="form-label">Username</label>
+												<input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="username" 
+                                                    name="username"
+                                                    [(ngModel)]="form.username"
+                                                    required
+                                                    minlength="3"
+                                                    maxlength="20"
+                                                    #username="ngModel"
+                                                    placeholder="Enter Username"
+                                                    [ngClass]="{ 'is-invalid': f.submitted && username.errors }" 
+                                                />
+                                                <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
+                                                    <div *ngIf="username.errors['required']">Username is required</div>
+                                                    <div *ngIf="username.errors['minlength']">
+                                                    Username must be at least 3 characters
+                                                    </div>
+                                                    <div *ngIf="username.errors['maxlength']">
+                                                    Username must be at most 20 characters
+                                                    </div>
+                                                </div>
+											</div>
+                                            <div class="col-12 mb-3">
+                                                <label for="inputChooseEmail" class="form-label">Email</label>
+                                                <input 
+                                                    type="email" 
+                                                    class="form-control" 
+                                                    id="email" 
+                                                    name="email"
+                                                    [(ngModel)]="form.email"
+                                                    required
+                                                    email
+                                                    #email="ngModel"
+                                                    [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+                                                    placeholder="Enter Your Email" 
+                                                    >
+
+                                                <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+                                                    <div *ngIf="email.errors['required']">Email is required</div>
+                                                    <div *ngIf="email.errors['email']">
+                                                        Email must be a valid email address
+                                                    </div>
+                                                </div>
+                                            </div>
+											<div class="col-12 mb-3">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group" id="show_hide_password">
+                                                    <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        name="password"
+                                                        [(ngModel)]="form.password"
+                                                        required
+                                                        minlength="6"
+                                                        #password="ngModel"
+                                                        [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                                                        />
+
+                                                    <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+                                                        <div *ngIf="password.errors['required']">Password is required</div>
+                                                        <div *ngIf="password.errors['minlength']">
+                                                            Password must be at least 6 characters
+                                                        </div>
+                                                    </div>
+                                                    <a href="javascript:;" class="input-group-text bg-transparent">
+                                                        <fa-icon [icon]="faEyeSlash"></fa-icon>
+                                                    </a>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<button type="submit" class="btn btn-outline-primary"><i class="bx bxs-lock-open"></i>Sign Up</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!--end wrapper-->
+	<!--start switcher-->
+	<div class="switcher-wrapper">
+		<div class="switcher-btn"> 
+            <fa-icon [icon]="faCog" animation="spin"></fa-icon>
+		</div>
+		<div class="switcher-body">
+			<div class="d-flex align-items-center">
+				<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
+			</div>
+			<hr/>
+			<p class="mb-0">Gaussian Texture</p>
+			<hr>
+			<ul class="switcher">
+				<li id="theme1"></li>
+				<li id="theme2"></li>
+				<li id="theme3"></li>
+				<li id="theme4"></li>
+				<li id="theme5"></li>
+				<li id="theme6"></li>
+			</ul>
+			<hr>
+			<p class="mb-0">Gradient Background</p>
+			<hr>
+			<ul class="switcher">
+				<li id="theme7"></li>
+				<li id="theme8"></li>
+				<li id="theme9"></li>
+				<li id="theme10"></li>
+				<li id="theme11"></li>
+				<li id="theme12"></li>
+				<li id="theme13"></li>
+				<li id="theme14"></li>
+				<li id="theme15"></li>
+			  </ul>
+		</div>
+	</div>
+	<!--end switcher-->
+</body>

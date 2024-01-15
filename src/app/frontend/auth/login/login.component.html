@@ -1,0 +1,131 @@
+<body class="bg-theme bg-theme2">
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container-fluid">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+					<div class="col mx-auto">
+						<div class="mb-4 text-center" *ngIf="!isLoggedIn">
+							<a routerLink="">
+								<img src="/assets/logo/Kaigan-logo-RGB.webp" width="180" alt="" />
+							</a>
+						</div>
+						<div class="card" *ngIf="!isLoggedIn" >
+							<div class="card-body">
+								<div class="border p-4 rounded">
+									<div class="text-center">
+										<h3 class="">Sign in</h3>
+									</div>
+									<div class="form-body">
+										<form *ngIf="!isLoggedIn" name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+											<div class="col-12 mb-3">
+												<label for="inputUsername" class="form-label">Username</label>
+												<input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="username" 
+                                                    name="username"
+                                                    [(ngModel)]="form.username"
+                                                    required
+                                                    #username = 'ngModel'
+                                                    placeholder="Enter your username" 
+                                                    [ngClass]="{'is-invalid': f.submitted && username.errors }">
+                                                
+                                                <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+                                                    Username is required!
+                                                </div>
+											</div>
+											<div class="col-12 mb-3">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group" id="show_hide_password">
+                                                    <input 
+                                                        type="password" 
+                                                        class="form-control border-end-0" 
+                                                        id="password" 
+                                                        name="password"
+                                                        [(ngModel)]="form.password"
+                                                        required
+                                                        minlength="6"
+                                                        #password = 'ngModel'
+                                                        placeholder="Enter your password" 
+                                                        [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+
+                                                    <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+                                                        <div *ngIf="password.errors['required']">Password is required</div>
+                                                        <div *ngIf="password.errors['minlength']">
+                                                            Password must be at least 6 characters
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="input-group-text bg-transparent p-0">
+														<button type="button" class="btn btn-dark rounded-0 rounded-end-2" (click)="toggleFieldTextType()">
+															<fa-icon [icon]="faEye"  aria-hidden="true" *ngIf="!show"></fa-icon>
+															<fa-icon [icon]="faEyeSlash"  aria-hidden="true" *ngIf="show"></fa-icon> -->
+
+															<!-- <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+															<i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i> -->
+														<!-- </button>
+													</div> -->
+												</div>
+											</div>
+											<div class="col-md-6 mb-3">
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<button type="submit" class="btn btn-outline-light"><i class="bx bxs-lock-open"></i>Sign in</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!--end wrapper-->
+	<!--start switcher-->
+	<div class="switcher-wrapper">
+		<div class="switcher-btn"> 
+            <fa-icon [icon]="faCog" animation="spin"></fa-icon>
+		</div>
+		<div class="switcher-body">
+			<div class="d-flex align-items-center">
+				<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
+			</div>
+			<hr/>
+			<p class="mb-0">Gaussian Texture</p>
+			<hr>
+			<ul class="switcher">
+				<li id="theme1"></li>
+				<li id="theme2"></li>
+				<li id="theme3"></li>
+				<li id="theme4"></li>
+				<li id="theme5"></li>
+				<li id="theme6"></li>
+			</ul>
+			<hr>
+			<p class="mb-0">Gradient Background</p>
+			<hr>
+			<ul class="switcher">
+				<li id="theme7"></li>
+				<li id="theme8"></li>
+				<li id="theme9"></li>
+				<li id="theme10"></li>
+				<li id="theme11"></li>
+				<li id="theme12"></li>
+				<li id="theme13"></li>
+				<li id="theme14"></li>
+				<li id="theme15"></li>
+			  </ul>
+		</div>
+	</div>
+	<!--end switcher-->
+</body>

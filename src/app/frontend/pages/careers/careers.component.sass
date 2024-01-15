@@ -1,0 +1,331 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+        
+.container-fluid
+    .container
+        padding-left: 15px
+        padding-right: 15px
+
+    .container.top-container
+        .image-container
+            padding-bottom: 3rem
+        
+        .career-benefit
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+            color: white
+
+            span
+                position: absolute
+                bottom: 2rem
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 22px   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+            
+            a
+                color: white
+
+            .benefitImage
+                padding: 0
+
+                span
+                    left: 0
+
+        .what-we-offer
+            padding: 3rem 0
+            font-size: 18px
+
+            h1, p
+                color: white
+
+            h1
+                text-align: center
+
+            p
+                text-align: justify  
+                margin-bottom: 0 
+
+    .main-container
+        // padding: 0
+        padding-bottom: 3rem
+        padding-top: 3rem
+        color: white
+
+        .table
+            .career-detail
+                cursor: pointer
+
+        ::ng-deep
+            .table
+                --bs-table-striped-color: red
+                .custom-table-head
+                    background-color: cadetblue
+
+                tbody tr:nth-child(odd)
+                    background: rgba(48, 80, 80, 0.5)
+                
+                tbody tr td
+                    opacity: 1
+    
+    .modal
+        .modal-content
+            background: url("/../assets/frontend/Banner/kaiganweb_bg.webp")
+            background-position: center
+            background-size: cover
+            margin-top: 0
+        
+        .modal-header
+            color: white
+            border-bottom-style: none
+
+            .btn-close
+                color: white !important
+
+        .modal-footer
+            border-top-style: none
+
+        .benefit-card:nth-child(2),
+        .benefit-card:nth-child(3),
+        .benefit-card:nth-child(4),
+        .benefit-card:nth-child(5),
+        .benefit-card:nth-child(6),
+        .benefit-card:nth-child(7),
+        .benefit-card:nth-child(8),
+        .benefit-card:nth-child(9),
+        .benefit-card:nth-child(10),
+        .benefit-card:nth-child(11),
+        .benefit-card:nth-child(12),
+        .benefit-card:nth-child(13),
+        .benefit-card:nth-child(14),
+        .benefit-card:nth-child(15)
+            margin-top: 1rem
+
+        .benefit-card
+            .text-center
+                color: black
+                font-size: 1.1rem
+                text-align: center
+                padding: 0 10px
+                font-weight: bold
+    
+@include media-breakpoint-up(sm)
+    .container-fluid
+        .main-container
+            min-height: 45vh
+
+            ::ng-deep
+                .table
+                    --bs-table-striped-color: red
+                    .custom-table-head
+                        background-color: cadetblue
+
+                    tbody tr:nth-child(odd)
+                        background: rgba(48, 80, 80, 0.5)
+                    
+                    tbody tr td
+                        opacity: 1
+
+@include media-breakpoint-up(md)
+    .container-fluid
+        .container.top-container
+            .image-container
+                padding-bottom: 3rem
+            
+            .career-benefit
+                position: relative
+                display: inline-block
+                margin-bottom: 1rem
+                color: white
+
+                span
+                    position: absolute
+                    bottom: 2rem
+                    text-align: center
+                    width: 100%
+                    font-weight: bold
+                    font-size: 18px !important   
+                    left: 0
+                    color: white
+
+                    &::before
+                        display: inline-block
+                        vertical-align: middle
+                        height: 100%
+                        content: ''  
+                
+                a
+                    color: white
+
+                .benefitImage
+                    padding: 0
+
+                    span
+                        left: 0
+
+            .what-we-offer
+                padding-top: 1.5rem
+                padding-bottom: 1.5rem
+
+                h1, p
+                    color: white
+
+                h1
+                    text-align: center
+
+                p
+                    text-align: justify  
+                    margin-bottom: 0 
+
+        .main-container
+            min-height: 0
+
+            ::ng-deep
+                .table
+                    --bs-table-striped-color: red
+                    .custom-table-head
+                        background-color: cadetblue
+
+                    tbody tr:nth-child(odd)
+                        background: rgba(48, 80, 80, 0.5)
+                    
+                    tbody tr td
+                        opacity: 1
+        
+        .modal
+            .benefit-card:nth-child(2),
+            .benefit-card:nth-child(3)
+                margin-top: 0
+                
+            .benefit-card:nth-child(4),
+            .benefit-card:nth-child(5),
+            .benefit-card:nth-child(6),
+            .benefit-card:nth-child(7),
+            .benefit-card:nth-child(8),
+            .benefit-card:nth-child(9),
+            .benefit-card:nth-child(10),
+            .benefit-card:nth-child(11),
+            .benefit-card:nth-child(12),
+            .benefit-card:nth-child(13),
+            .benefit-card:nth-child(14),
+            .benefit-card:nth-child(15)
+                margin-top: 1rem
+
+            .benefit-card
+                .text-center
+                    color: black
+                    font-size: .8rem
+                    text-align: center
+                    padding: 0 10px
+                    font-weight: bold
+
+@include media-breakpoint-up(lg)
+    .container-fluid
+        .container.top-container
+            .what-we-offer
+                padding-top: 5rem
+                // padding-bottom: 5rem
+
+                h1
+                    margin-bottom: 1.5rem
+
+            .career-benefit
+                span
+                    font-size: 24px !important
+                    color: white
+
+        .main-container
+            min-height: 0
+            padding-top: 0
+            padding-bottom: 5rem
+
+            h1
+                font-size: 2.3rem
+                text-align: center
+                font-weight: bold
+                color: white
+                text-transform: uppercase
+                margin-bottom: 1.5rem
+                
+            .table
+                .career-detail
+                    cursor: pointer
+                
+            ::ng-deep
+                .table
+                    --bs-table-striped-color: red
+                    .custom-table-head
+                        background-color: cadetblue
+
+                    tbody tr:nth-child(odd)
+                        background: rgba(48, 80, 80, 0.5)
+                    
+                    tbody tr td
+                        opacity: 1
+        
+        .modal
+            .benefit-card:nth-child(4),
+            .benefit-card:nth-child(5),
+            .benefit-card:nth-child(6),
+            .benefit-card:nth-child(7),
+            .benefit-card:nth-child(8),
+            .benefit-card:nth-child(9),
+            .benefit-card:nth-child(10),
+            .benefit-card:nth-child(11),
+            .benefit-card:nth-child(12),
+            .benefit-card:nth-child(13),
+            .benefit-card:nth-child(14),
+            .benefit-card:nth-child(15)
+                margin-top: 1rem
+
+            .benefit-card
+                .text-center
+                    color: black
+                    font-size: .8rem
+                    text-align: center
+                    padding: 0 10px
+                    font-weight: bold
+
+@include media-breakpoint-up(xl)
+    .container-fluid
+        .main-container
+            min-height: 0
+
+            ::ng-deep
+                .table
+                    --bs-table-striped-color: red
+                    .custom-table-head
+                        background-color: cadetblue
+
+                    tbody tr:nth-child(odd)
+                        background: rgba(48, 80, 80, 0.5)
+                    
+                    tbody tr td
+                        opacity: 1
+
+@include media-breakpoint-up(xxl)
+    .container-fluid
+        .main-container
+            min-height: 45vh
+
+            ::ng-deep
+                .table
+                    --bs-table-striped-color: red
+                    .custom-table-head
+                        background-color: cadetblue
+
+                    tbody tr:nth-child(odd)
+                        background: rgba(48, 80, 80, 0.5)
+                    
+                    tbody tr td
+                        opacity: 1

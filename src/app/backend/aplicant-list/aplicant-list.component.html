@@ -1,0 +1,335 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Job Application</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Job Application</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <div class="d-flex justify-content-end">
+                        <div class="col-lg-4 me-2">
+                            <div *ngIf="zipFileReady == true;else elseBlock">
+                                <button type="button" class="btn btn-sm btn-primary w-100" (click)="downloadZip()">
+                                    <fa-icon [icon]="faFileZipper"></fa-icon> Download ZIP File
+                                </button>
+                            </div>
+                            <ng-template #elseBlock>
+                                <button type="button" class="btn btn-sm btn-primary w-100" (click)="makeaZIP()">
+                                    <fa-icon [icon]="faFileZipper"></fa-icon> Generate ZIP File
+                                </button>
+                            </ng-template>
+                        </div>
+                        <div class="col-lg-4 me-2">
+                            <div *ngIf="zipFileReady == true">
+                                <button type="button" class="btn btn-sm btn-danger w-100" (click)="deleteZip()">
+                                    <fa-icon [icon]="faFileZipper"></fa-icon> Delete ZIP File
+                                </button>
+                            </div>
+                        </div>
+                        <!-- export excel -->
+                        <div class="col-lg-5 me-2">
+                            <button type="button" class="btn btn-sm btn-success w-100" (click)="exportExcel()">
+                                <fa-icon [icon]="faFileExcel"></fa-icon> Export All Resumes
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-2">
+                        <div class="col-lg-7 me-2">
+                            <a routerLink="/admin/job-vacancy/applicant-list/category" type="button" class="btn btn-sm btn-info w-100">
+                                <fa-icon [icon]="faTag"></fa-icon> Download Resumes by Category
+                            </a>
+                        </div>
+                        <div class="col-lg-7">
+                            <a routerLink="/admin/job-vacancy/applicant-list/datetime-sort" type="button" class="btn btn-sm btn-light w-100">
+                                <fa-icon [icon]="faCalendarDays"></fa-icon> Export to Excel by Date Range
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <!-- export data as excel xlsx -->
+                            <table class="table mb-0 align-middle" id="exportData" style="display: none;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Job Title</th>
+                                        <th>Job Location</th>
+                                        <th>Resume File</th>
+                                        <th>Cover Letter</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>7
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Street Address</th>
+                                        <th>City</th>
+                                        <th>State or Province</th>
+                                        <th>Zip Code</th>
+                                        <th>Country</th>
+                                        <th>LinkedIn Profile</th>
+                                        <th>Hear Us From</th>
+                                        <th>Gender</th>
+                                        <th>Race</th>
+                                        <th>Created at</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of JobApplicationData; let i = index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>{{data.job_title}}</td>
+                                        <td>{{data.job_location}}</td>
+                                        <td>{{data.resume_file}}</td>
+                                        <td [innerHTML]="data.cover_letter | htmldata"></td>
+                                        <td>{{data.first_name}}</td>
+                                        <td>{{data.last_name}}</td>
+                                        <td>{{data.email}}</td>
+                                        <td>{{data.phone}}</td>
+                                        <td [innerHTML]="data.street_address | htmldata"></td>
+                                        <td [innerHTML]="data.city | htmldata"></td>
+                                        <td [innerHTML]="data.state_or_province | htmldata"></td>
+                                        <td [innerHTML]="data.zip_code | htmldata"></td>
+                                        <td>{{data.country}}</td>
+                                        <td>{{data.linkedIn_profile}}</td>
+                                        <td>{{data.hear_us_from}}</td>
+                                        <td>{{data.gender}}</td>
+                                        <td>{{data.race}}</td>
+                                        <td class=" w-25">
+                                            {{data.createdAt | date: 'fullDate'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- displayed table -->
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableJobApp">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Job Title</th>
+                                            <th>Job Location</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of JobApplicationData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.job_title}}</td>
+                                            <td>{{data.job_location}}</td>
+                                            <td>{{data.first_name}}</td>
+                                            <td>{{data.last_name}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary me-2 mb-2 w-100"  data-bs-toggle="modal" data-bs-target="#detailJobApp" (click)="detailData(data.id)">
+                                                    <fa-icon [icon]="faSearch"></fa-icon>
+                                                    Detail
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- detail modal -->
+    <div class="modal fade" id="detailJobApp" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Detail Job Applicant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Job Title</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editJobApplicationForm.job_title}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Job Location</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editJobApplicationForm.job_location}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Resume File</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-6 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.resume_file"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Cover Letter</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-6 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.cover_letter"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">First Name</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.first_name"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Last Name</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.last_name"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Email</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.email"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Phone Number</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.phone"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Street Address</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.street_address"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">City</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.city"></div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">State or Province</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.state_or_province"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Zip Code</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.zip_code"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Country</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.country"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">LinkedIn Profile</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.linkedIn_profile"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Hear US From</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.hear_us_from"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Gender</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.gender"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Race</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.race"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Created At</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editJobApplicationForm.createdAt | date: 'fullDate'"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5 ps-0">Download Resume</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">
+                                    <button (click)="downloadResume(editJobApplicationForm.resume_file)" class="btn btn-sm btn-primary">Download Resume</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

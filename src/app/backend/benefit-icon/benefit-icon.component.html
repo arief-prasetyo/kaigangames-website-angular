@@ -1,0 +1,125 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Career</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Career</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Benefit Icon</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#addBenefitIcon">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add New Icon
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableBI">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Icon</th>
+                                            <th>Icon Hover</th>
+                                            <th>Description</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of BenefitIconData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.icon_name}}</td>
+                                            <td>{{data.iconHover_name}}</td>
+                                            <td>{{data.icon_description}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBoxBenefitIcon(data.id, data.icon_name, data.iconHover_name)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- Add Icon -->
+    <div class="modal fade" id="addBenefitIcon" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Icon</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form (ngSubmit)="onSubmitBenefitIcon()" enctype="multipart/form-data">
+                    <div class="modal-body text-white">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="gameName" class="form-label">Benefit Icon</label>
+                                <input type="file" class="form-control" accept="image/*" id="icon_name" name="icon_name" [(ngModel)]="BenefitIcon.icon_name" (change)="selectFile($event)"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="gameName" class="form-label">Benefit Hover Icon</label>
+                                <input type="file" class="form-control" accept="image/*" id="iconHover_name" name="iconHover_name" [(ngModel)]="BenefitIcon.iconHover_name" (change)="selectFile2($event)"/>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Benefit / Perks Name</label>
+                            <textarea name="icon_description" id="icon_description" [(ngModel)]="BenefitIcon.icon_description" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit"
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal">Save Benefit Icon</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

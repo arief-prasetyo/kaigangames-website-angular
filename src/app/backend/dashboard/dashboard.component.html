@@ -1,0 +1,95 @@
+<!--wrapper-->
+<div class="wrapper">
+    <!-- sidebar -->
+    <app-backend-navigations></app-backend-navigations>
+    <app-backend-header></app-backend-header>
+    <div class="page-wrapper">
+        <div class="page-content">
+            <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4">
+                <div class="col">
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="mb-0">Total Administartor </p>
+                                    <h4 class="my-1">{{userData}}</h4>
+                                    <!-- <p class="mb-0 font-13"><i class='bx bxs-up-arrow align-middle'></i>$34 Since last week</p> -->
+                                </div>
+                                <div class="widgets-icons ms-auto">
+                                    <fa-icon [icon]="faUserAstronaut"></fa-icon>
+                                </div>
+                            </div>
+                            <div id="chart1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="mb-0">Total Games</p>
+                                    <h4 class="my-1">{{gameListData}}</h4>
+                                    <!-- <p class="mb-0 font-13"><i class='bx bxs-up-arrow align-middle'></i>14% Since last week</p> -->
+                                </div>
+                                <div class="widgets-icons ms-auto">
+                                    <fa-icon [icon]="faGamepad"></fa-icon>
+                                </div>
+                            </div>
+                            <div id="chart2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="mb-0">Total Open Position</p>
+                                    <h4 class="my-1">{{OpenPositionData}}</h4>
+                                    <!-- <p class="mb-0 font-13"><i class='bx bxs-down-arrow align-middle'></i>12.4% Since last week</p> -->
+                                </div>
+                                <div class="widgets-icons ms-auto">
+                                    <fa-icon [icon]="faBriefcase"></fa-icon>
+                                </div>
+                            </div>
+                            <div id="chart3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="mb-0">Total Job Applicant</p>
+                                    <h4 class="my-1">{{JobApplicationData}}</h4>
+                                    <!-- <p class="mb-0 font-13"><i class='bx bxs-down-arrow align-middle'></i>12.4% Since last week</p> -->
+                                </div>
+                                <div class="widgets-icons ms-auto">
+                                    <fa-icon [icon]="faBriefcase"></fa-icon>
+                                </div>
+                            </div>
+                            <div id="chart3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <iframe src='https://widget-6cc547632e474103a5c8c220cd84cb53.elfsig.ht' width='100%' height='150' frameborder='0'></iframe>
+
+            <p>Access Token: {{ accessToken }}</p>
+            <p>isloggedin: {{isLoggedIn}}</p>
+            <p>username: {{username}}</p>
+            <p>roles: {{roles}}</p>
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper ps-0 pe-0">
+    <div class="container">
+        <h1 class="title">internship programs</h1>
+        <div class="wrapper-carousel">
+          <carousel [isAnimated]="true" [showIndicators]="false">
+              <slide  *ngFor="let item of internshipData; index as i; trackBy: trackByFn" [ngClass]="{active: i===0}" class="carousel-slide">
+                <img fetchpriority="low" loading=lazy src="https://new-rest.kaigangames.com/{{item.image_path}}" alt="{{item.image}}" alt="first slide" style="display: block; width: 100%;">
+              </slide>
+          </carousel>
+        </div>
+        <div class="mt-5 wrapper-box" data-aos="fade-up" data-aos-duration="1500">
+            <p>
+                Looking to break into the gaming industry? Kaigan Games offers an exciting internship program for students and recent graduates. Work on real projects, gain hands-on experience, and learn from experienced game developers. Get immersed in game design, programming, art, and production and jumpstart your career in gaming.
+            </p><br>
+            <p>
+                Throughout the program, interns will have access to cutting-edge tools and technologies to help them develop their skills and knowledge. They will also receive mentorship and guidance from their supervisors, who will help them navigate the challenges and complexities of game development.
+            </p><br>
+            <p>
+                The internship program is open to individuals from all over the world who are passionate about gaming and eager to learn. This is a unique opportunity to gain valuable industry experience, build a strong portfolio, and jumpstart your career in the gaming industry. Join Kaigan Games and level up your skills today!
+            </p>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

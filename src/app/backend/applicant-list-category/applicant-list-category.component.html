@@ -1,0 +1,149 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Job Application</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Job Application</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <!-- ZIP File Operation -->
+                    <div *ngIf="zipFileReady == true;else elseBlock">
+                        <button type="button" class="btn btn-sm btn-primary mb-2" (click)="downloadZip()">
+                            <fa-icon [icon]="faFileZipper"></fa-icon> Download ZIP File
+                        </button>
+                    </div>
+                    <ng-template #elseBlock>
+                        <div *ngIf="dataExist == false; else dataTrue" class="mb-2">
+                            <button type="button" class="btn btn-sm btn-primary me-2" disabled>
+                                <fa-icon [icon]="faFileZipper"></fa-icon> Generate ZIP File
+                            </button>
+                        </div>
+                        <ng-template #dataTrue>
+                            <button type="button" class="btn btn-sm btn-primary me-2" (click)="makeaZIP()">
+                                <fa-icon [icon]="faFileZipper"></fa-icon> Generate ZIP File
+                            </button>
+                        </ng-template>
+                    </ng-template>
+                    <div *ngIf="zipFileReady == true">
+                        <button type="button" class="btn btn-sm btn-danger mb-2" (click)="deleteZip()">
+                            <fa-icon [icon]="faFileZipper"></fa-icon> Delete ZIP File
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 mx-auto">
+                    <hr/>
+                    <div class="d-flex justify-content-center" style="margin-bottom: -15px;">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 me-2">
+                            <form [formGroup]="userForm">
+                                <div class="input-group mb-3">
+                                    <select class="form-select" aria-label="Default select example" name="gop" formControlName="gop">
+                                        <option value="" selected>-Please Choose One-</option>
+                                        <option *ngFor="let item of GroupOpenPositionData;" value="{{item.group_position}}">{{item.group_position}}</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6">
+                            <div class="d-grid">
+                                <button class="btn btn-primary" (click)="setValue()">
+                                    <fa-icon [icon]="faSearchPlus"></fa-icon> Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <!-- displayed table -->
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableJobApp">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Group Position</th>
+                                            <th>Job Title</th>
+                                            <th>Job Location</th>
+                                            <th>Resume File</th>
+                                            <th>Cover Letter</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>Street Address</th>
+                                            <th>City</th>
+                                            <th>State or Province</th>
+                                            <th>Zip Code</th>
+                                            <th>Country</th>
+                                            <th>LinkedIn Profile</th>
+                                            <th>Hear US From</th>
+                                            <th>Gender</th>
+                                            <th>Race</th>
+                                            <th>Created at</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of JobApplicationData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.group_position}}</td>
+                                            <td>{{data.job_title}}</td>
+                                            <td>{{data.job_location}}</td>
+                                            <td>{{data.resume_file}}</td>
+                                            <td [innerHTML]="data.cover_letter | htmldata"></td>
+                                            <td>{{data.first_name}}</td>
+                                            <td>{{data.last_name}}</td>
+                                            <td>{{data.email}}</td>
+                                            <td>{{data.phone}}</td>
+                                            <td [innerHTML]="data.street_address | htmldata"></td>
+                                            <td [innerHTML]="data.city | htmldata"></td>
+                                            <td [innerHTML]="data.state_or_province | htmldata"></td>
+                                            <td [innerHTML]="data.zip_code | htmldata"></td>
+                                            <td>{{data.country}}</td>
+                                            <td>{{data.linkedIn_profile}}</td>
+                                            <td>{{data.hear_us_from}}</td>
+                                            <td>{{data.gender}}</td>
+                                            <td>{{data.race}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

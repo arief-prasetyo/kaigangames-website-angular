@@ -1,0 +1,354 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper">
+    <div class="canvas-wrapper">
+        <app-threejslogo></app-threejslogo>
+    </div>
+    <div class="container home-container" data-aos="fade-up" data-aos-duration="1500">
+      <div class="about-wrapper">
+        <h2>Kaigan Games</h2>
+        <div *ngFor="let item of aboutData; trackBy: trackByFn" class="about-data">
+          <p [innerHTML]="item.content | htmldata"></p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <a routerLink="/about" class="btn btn-primary fw-bold">Learn More</a>
+        </div>
+      </div>
+      <div class="wrapper-featured-game" data-aos="fade-up" data-aos-duration="1500">
+        <h2>featured games</h2>
+        <!-- visible from md to xxl screen -->
+        <div class="d-none d-xxl-block d-xl-block d-lg-block">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfig" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let slide of gameListData; trackBy: trackByFn" class="slide">
+              <div class="card">
+                <img src="https://new-rest.kaigangames.com{{slide.image_path}}" loading="lazy" alt="{{slide.game_image}}" class="w-100">
+                <div class="info">
+                  <h4>{{slide.game_name}}</h4>
+                  <p [innerHTML]="(slide.game_description.length>200)? (slide.game_description | slice:0:200)+'...':(slide.game_description) | htmldata"></p>
+                  <a class="button" target="_blank" href="{{slide.game_url}}">Read More</a>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on md screen -->
+        <div class="d-none d-md-block d-lg-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigMD" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let slide of gameListData; trackBy: trackByFn" class="slide">
+              <div class="card">
+                <img src="https://new-rest.kaigangames.com{{slide.image_path}}" loading="lazy" alt="{{slide.game_image}}" class="w-100">
+                <div class="info">
+                  <h4>{{slide.game_name}}</h4>
+                  <p [innerHTML]="(slide.game_description.length>200)? (slide.game_description | slice:0:200)+'...':(slide.game_description) | htmldata"></p>
+                  <a class="button" target="_blank" href="{{slide.game_url}}">Read More</a>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on sm screen -->
+        <div class="d-none d-sm-block d-md-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigSM" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let slide of gameListData; trackBy: trackByFn" class="slide">
+              <div class="card">
+                <img src="https://new-rest.kaigangames.com{{slide.image_path}}" loading="lazy" alt="{{slide.game_image}}" class="w-100">
+                <div class="info">
+                  <h4>{{slide.game_name}}</h4>
+                  <p [innerHTML]="(slide.game_description.length>200)? (slide.game_description | slice:0:200)+'...':(slide.game_description) | htmldata"></p>
+                  <a class="button" target="_blank" href="{{slide.game_url}}">Read More</a>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on xs screen -->
+        <div class="d-block d-sm-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigSM" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let slide of gameListData; trackBy: trackByFn" class="slide">
+              <div class="card">
+                <img src="https://new-rest.kaigangames.com{{slide.image_path}}" loading="lazy" alt="{{slide.game_image}}" class="w-100">
+                <div class="info">
+                  <h4>{{slide.game_name}}</h4>
+                  <p [innerHTML]="(slide.game_description.length>200)? (slide.game_description | slice:0:200)+'...':(slide.game_description) | htmldata"></p>
+                  <a class="button" target="_blank" href="{{slide.game_url}}">Read More</a>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+      <div class="wrapper-testimonials" data-aos="fade-up" data-aos-duration="1500">
+        <h2>testimonials</h2>
+        <!-- visible from xl to xxl screen -->
+        <div class="d-none d-xxl-block d-xl-block">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfig" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let item of testimonialsData; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+              <div class="card text-center d-flex flex-column justify-content-center testimonial-card">
+                <div class="card-body">
+                  <div class="testimonial-text">
+                    <div *ngIf="item.testimonial_text.length > 210; else elseBlock">
+                      <p class="testiText1 limitTestimonialText block" [innerHTML]="(item.testimonial_text.length>207)? (item.testimonial_text | slice:0:207)+'...':(item.testimonial_text) | htmldata"></p>
+                      <p class="card-text testiText2 fullTestimonialText hide" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </div>
+                    <ng-template #elseBlock>
+                      <p class="card-text" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </ng-template>
+                  </div>
+
+                  <div class="image-and-position">
+                    <div class="d-flex justify-content-center">
+                      <img src="https://new-rest.kaigangames.com{{item.user_image_path}}" loading="lazy" class="user-testimony" alt="{{item.user_image_path}}">
+                    </div>
+                    <div class="name mt-3">
+                      <h5>{{item.user_name}}</h5>
+                      <h6>{{item.user_position}}</h6>
+                    </div>
+                  </div>
+
+                  <div *ngIf="item.testimonial_text.length> 210">
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent expand-btn" (click)="expandBTN()">
+                        <fa-icon [icon]="faChevronDown" class="expand-icon color-white"></fa-icon>
+                      </button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent no-expand-btn" style="display: none;" (click)="noExpandBTN()">
+                        <fa-icon [icon]="faChevronUp" class="expand-icon color-white"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on lg screen -->
+        <div class="d-none d-lg-block d-xl-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigMD" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let item of testimonialsData; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+              <div class="card text-center d-flex flex-column justify-content-center testimonial-card">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <div class="testimonial-text">
+                    <div *ngIf="item.testimonial_text.length > 210; else elseBlock">
+                      <p class="testiText1 limitTestimonialText block" [innerHTML]="(item.testimonial_text.length>207)? (item.testimonial_text | slice:0:207)+'...':(item.testimonial_text) | htmldata"></p>
+                      <p class="card-text testiText2 fullTestimonialText hide" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </div>
+                    <ng-template #elseBlock>
+                      <p class="card-text" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </ng-template>
+                  </div>
+
+                  <div class="image-and-position">
+                    <div class="d-flex justify-content-center">
+                      <img src="https://new-rest.kaigangames.com{{item.user_image_path}}" loading="lazy" class="user-testimony" alt="{{item.user_image_path}}">
+                    </div>
+                    <div class="name mt-3">
+                      <h5>{{item.user_name}}</h5>
+                      <h6>{{item.user_position}}</h6>
+                    </div>
+                  </div>
+
+                  <div *ngIf="item.testimonial_text.length> 210">
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent expand-btn" (click)="expandBTN()">
+                        <fa-icon [icon]="faChevronDown" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent no-expand-btn" style="display: none;" (click)="noExpandBTN()">
+                        <fa-icon [icon]="faChevronUp" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on md screen -->
+        <div class="d-none d-md-block d-lg-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigSM" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let item of testimonialsData; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+              <div class="card text-center d-flex flex-column justify-content-center testimonial-card">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <div class="testimonial-text">
+                    <div *ngIf="item.testimonial_text.length > 210; else elseBlock">
+                      <p class="testiText1 limitTestimonialText block" [innerHTML]="(item.testimonial_text.length>207)? (item.testimonial_text | slice:0:207)+'...':(item.testimonial_text) | htmldata"></p>
+                      <p class="card-text testiText2 fullTestimonialText hide" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </div>
+                    <ng-template #elseBlock>
+                      <p class="card-text" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </ng-template>
+                  </div>
+
+                  <div class="image-and-position">
+                    <div class="d-flex justify-content-center">
+                      <img src="https://new-rest.kaigangames.com{{item.user_image_path}}" loading="lazy" class="user-testimony" alt="{{item.user_image_path}}">
+                    </div>
+                    <div class="name mt-3">
+                      <h5>{{item.user_name}}</h5>
+                      <h6>{{item.user_position}}</h6>
+                    </div>
+                  </div>
+
+                  <div *ngIf="item.testimonial_text.length> 210">
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent expand-btn" (click)="expandBTN()">
+                        <fa-icon [icon]="faChevronDown" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent no-expand-btn" style="display: none;" (click)="noExpandBTN()">
+                        <fa-icon [icon]="faChevronUp" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on sm screen -->
+        <div class="d-none d-sm-block d-md-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigSM" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let item of testimonialsData; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+              <div class="card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <div *ngIf="item.testimonial_text.length > 210; else elseBlock">
+                    <p class="testiText1 limitTestimonialText block" [innerHTML]="(item.testimonial_text.length>207)? (item.testimonial_text | slice:0:207)+'...':(item.testimonial_text) | htmldata"></p>
+                    <p class="card-text testiText2 fullTestimonialText hide" [innerHTML]="item.testimonial_text | htmldata"></p>
+                  </div>
+                  <ng-template #elseBlock>
+                    <p class="card-text" [innerHTML]="item.testimonial_text | htmldata"></p>
+                  </ng-template>
+
+                  <div class="d-flex justify-content-center">
+                    <img src="https://new-rest.kaigangames.com{{item.user_image_path}}" loading="lazy" class="user-testimony" alt="{{item.user_image_path}}">
+                  </div>
+                  <div class="name mt-3">
+                    <h5>{{item.user_name}}</h5>
+                    <h6>{{item.user_position}}</h6>
+                  </div>
+                  <div *ngIf="item.testimonial_text.length> 210">
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent expand-btn mt-3" (click)="expandBTN()">
+                        <fa-icon [icon]="faChevronDown" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent no-expand-btn mt-3" style="display: none;" (click)="noExpandBTN()">
+                        <fa-icon [icon]="faChevronUp" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <!-- visible on xs screen -->
+        <div class="d-block d-sm-none">
+          <ngx-slick-carousel class="carousel" 
+                          #slickModal="slick-carousel" 
+                          [config]="slideConfigSM" 
+                          (init)="slickInit($event)"
+                          (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let item of testimonialsData; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+              <div class="card text-center d-flex flex-column justify-content-center testimonial-card">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <div class="testimonial-text">
+                    <div *ngIf="item.testimonial_text.length > 210; else elseBlock">
+                      <p class="testiText1 limitTestimonialText block" [innerHTML]="(item.testimonial_text.length>207)? (item.testimonial_text | slice:0:207)+'...':(item.testimonial_text) | htmldata"></p>
+                      <p class="card-text testiText2 fullTestimonialText hide" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </div>
+                    <ng-template #elseBlock>
+                      <p class="card-text" [innerHTML]="item.testimonial_text | htmldata"></p>
+                    </ng-template>
+                  </div>
+
+                  <div class="image-and-position">
+                    <div class="d-flex justify-content-center">
+                      <img src="https://new-rest.kaigangames.com{{item.user_image_path}}" loading="lazy" class="user-testimony" alt="{{item.user_image_path}}">
+                    </div>
+                    <div class="name mt-3">
+                      <h5>{{item.user_name}}</h5>
+                      <h6>{{item.user_position}}</h6>
+                    </div>
+                  </div>
+                  
+                  <div *ngIf="item.testimonial_text.length> 210">
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent expand-btn mt-3" (click)="expandBTN()">
+                        <fa-icon [icon]="faChevronDown" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-sm btn-transparent no-expand-btn mt-3" style="display: none;" (click)="noExpandBTN()">
+                        <fa-icon [icon]="faChevronUp" class="color-white"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+
+      <div class="wrapper-were-hiring">
+        <div class="row">
+          <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 hiring-text" data-aos="fade-right" data-aos-duration="1500">
+            <div class="custom-width">
+              <h1>we are hiring!</h1>
+              <h6 class="mb-3">
+                Join Kaigan Games team! Be part of the rapidly growing game company and watch your craft become a reality!
+              </h6>
+              <a routerLink="/careers">
+                <button class="btn btn-rainbow">learn more</button>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 hiring-banner" data-aos="fade-left" data-aos-duration="1500">
+            <img src="./assets/frontend/Banner/kaigan-website-hiringartwork.webp" loading="lazy" class="w-100" alt="hiringartwork banner">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<app-footer></app-footer>

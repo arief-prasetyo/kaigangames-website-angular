@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper">
+    <div class="container">
+        <h1 class="title">life at kaigangames</h1>
+        <div class="description mt-4 d-flex justify-content-center">
+            <div class="description-box">
+                <p>
+                    Ever wondered what it would be like to work alongside great-minded people in the game industry? Our team is full of creative and collaborative folks who love to think outside the box and try new things. At Kaigan Games, we believe that everyone's ideas are valuable. We’ve cultivated an open and encouraging workplace where everyone can be heard.
+                </p>
+                <p>
+                    You can bet we prioritize work-life balance and make sure everyone has the opportunity to recharge and pursue their passion. If you're looking for a place to work hard, play hard, and create some seriously cool games, then Kaigan Games is the place to be!
+                </p>
+            </div>
+        </div>
+        <div class="photo-box mt-5">
+            <div class="d-none d-xxl-block d-xl-block d-lg-block">
+                <div class="row">
+                    <div class="col-lx-6 col-lg-6 col-md-6 col-sm-12 col-12 left-side" *ngFor="let item of aboutTeamImageData_2; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500">
+                            <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                                <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                            </a>
+                    </div>
+                </div>
+                <div class="row wrapper-second-row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 second-row" *ngFor="let item of aboutTeamImageData_3; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500">
+                            <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                                <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                            </a>
+                    </div>
+                </div>
+                <div class="row wrapper-third-row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 third-row" *ngFor="let item of aboutTeamImageData_4; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500">
+                            <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                                <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                            </a>
+                    </div>
+                </div>
+                <div class="row wrapper-fourth-row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 fourth-row" *ngFor="let item of aboutTeamImageData_5; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500">
+                            <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                                <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                            </a>
+                    </div>
+                </div>
+                <div class="row wrapper-fiveth-row d-flex justify-content-center">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 fiveth-row" *ngFor="let item of aboutTeamImageData_6; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500">
+                            <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                                <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                            </a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-md-block d-sm-block d-lg-none medium-block">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6" *ngFor="let item of aboutTeamImageData; trackBy: trackByFn">
+                        <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                            <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block d-sm-none small-block">
+                <div class="row">
+                    <div class="col-12" *ngFor="let item of aboutTeamImageData; trackBy: trackByFn">
+                        <a href="https://new-rest.kaigangames.com{{item.image_path}}">
+                            <img fetchpriority="low" loading="lazy" src="https://new-rest.kaigangames.com{{item.image_path}}" alt="{{item.image}}" alt="Photo" class="d-block w-100">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,200 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Community</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Community</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Community Highlight Section</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success w-100" data-bs-toggle="modal" data-bs-target="#addCommunity">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add Community Highlight Section
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableCommunityHighlightSection">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Community ID</th>
+                                            <th>Header Text</th>
+                                            <th>Section Name</th>
+                                            <th>Section Text</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of communityData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.ch_id}}</td>
+                                            <td [innerHTML]="data.chs_header_text | htmldata"></td>
+                                            <td>{{data.chs_name}}</td>
+                                            <td [innerHTML]="data.chs_content | htmldata"></td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info mb-2 w-100"  data-bs-toggle="modal" data-bs-target="#editCommunity" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+     <!-- Create Modal -->
+     <div class="modal fade" id="addCommunity" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Community Highlight Section</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <div class="modal-body text-white">
+                        <div class="col-lg-12">
+                            <label for="title" class="form-label">Community Highlight Title (Month)</label>
+                            <select class="form-select" id="ch_id" name="ch_id" [(ngModel)]="CL.ch_id" aria-label="Default select example" required>
+                                <option selected>Open this select menu</option>
+                                <option *ngFor="let item of communityHData" value="{{item.id}}" >{{item.community_highlight_title}}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <label for="title" class="form-label">Community Highlights Header Text</label>
+                            <editor 
+                            apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                            [init]="{ plugins: 'lists link image table code help wordcount'}"
+                            id="chs_header_text"
+                            name="chs_header_text"
+                            required
+                            [(ngModel)]="CL.chs_header_text"></editor>
+                        </div> 
+                        <div class="col-lg-12 mt-3">
+                            <label for="image" class="form-label">Community Highlights Section Name</label>
+                            <input type="text" class="form-control" id="chs_name" name="chs_name" [(ngModel)]="CL.chs_name" placeholder="Community Highlights Section Name ..." required>
+                        </div>  
+                        <div class="col-lg-12 mt-3">
+                            <label for="title" class="form-label">Community Highlights Section Content</label>
+                            <editor 
+                            apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                            [init]="{ plugins: 'lists link image table code help wordcount'}"
+                            id="chs_content"
+                            [(ngModel)]="CL.chs_content"
+                            name="chs_content"></editor>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal">Save Community Highlight Section</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editCommunity" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Community Highlight Section</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="col-lg-12">
+                        <label for="title" class="form-label">Community Title</label>
+                        <select class="form-select" id="ch_id" name="ch_id" #ch_id="ngModel" [(ngModel)]="editCommunity.ch_id" aria-label="Default select example" required>
+                            <option selected>Open this select menu</option>
+                            <option *ngFor="let item of communityHData" value="{{item.id}}" >{{item.community_highlight_title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label for="title" class="form-label">Community Highlights Header Text</label>
+                        <editor 
+                        apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                        [init]="{ plugins: 'lists link image table code help wordcount'}"
+                        id="chs_header_text_edit"
+                        name="chs_header_text"
+                        #chs_header_text="ngModel"
+                        required
+                        [(ngModel)]="editCommunity.chs_header_text"></editor>
+                    </div> 
+                    <!-- <select class="form-select" id="month" name="month" #month="ngModel" [(ngModel)]="editCommunity.month" placeholder="Community Highlights Month ..." required></select> -->
+                    <div class="col-lg-12 mt-3">
+                        <label for="image" class="form-label">Community Highlights Section Name</label>
+                        <input type="text" class="form-control" id="chs_name" name="chs_name" #chs_name="ngModel" [(ngModel)]="editCommunity.chs_name" placeholder="Community Highlights Section Name ..." required>
+                    </div>  
+                    <div class="col-lg-12 mt-3">
+                        <label for="title" class="form-label">Community Highlights Section Content</label>
+                        <editor 
+                        apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                        [init]="{ plugins: 'lists link image table code help wordcount'}"
+                        id="chs_content_edit"
+                        [(ngModel)]="editCommunity.chs_content"
+                        #chs_content="ngModel"
+                        name="chs_content"></editor>
+                    </div>  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        type="button"
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="updateData(id)">Update Community Highlight Section</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

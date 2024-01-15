@@ -1,0 +1,44 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+.page-wrapper
+    color: white
+
+    .wrapper-contact
+        padding: 3rem 15px
+
+        .left-section
+            h2
+                font-size: 2rem
+        
+        .right-section
+            .wrapper-btn
+                padding-top: .75rem
+
+@include media-breakpoint-up(sm)
+
+@include media-breakpoint-up(md)
+                    
+@include media-breakpoint-up(lg)
+    .page-wrapper
+        .wrapper-contact
+            padding: 5rem 0
+
+            .left-section
+                h2
+                    font-size: 3rem
+
+@include media-breakpoint-up(xl)
+    .page-wrapper
+        .wrapper-contact
+            padding: 5rem 0
+
+            .left-section
+                h2
+                    font-size: 3.5rem
+
+@include media-breakpoint-up(xxl)
+    .page-wrapper
+        .wrapper-contact
+            padding: 8rem 0

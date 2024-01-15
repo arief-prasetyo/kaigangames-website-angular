@@ -1,0 +1,151 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+.page-wrapper
+    .container
+        padding: 5rem 15px
+
+        .small-block
+            .col-12
+                img
+                    margin-bottom: 1.5rem
+                    height: 15rem
+                    object-fit: cover
+
+        h1
+            font-size: 2.3rem
+            text-align: center
+            font-weight: bold
+            color: white
+            text-transform: uppercase
+            margin-bottom: 1rem
+        
+        .description
+            .description-box
+                width: 85%
+
+                p
+                    font-size: 1.25rem
+                    text-align: center
+                    color: white
+
+        .right-side
+            .second-row
+                margin-top: 2rem
+
+        .left-side
+            margin-top: 1rem
+
+@include media-breakpoint-up(sm)
+    .page-wrapper
+        .container
+            .description
+                .description-box
+                    width: 75%
+
+            .medium-block
+                .col-md-6
+                    img
+                        margin-bottom: 1.5rem
+                        height: 15rem
+                        object-fit: cover
+ 
+@include media-breakpoint-up(md)  
+    .page-wrapper
+        .container
+            .description
+                .description-box
+                    width: 75%
+
+            .medium-block
+                .col-md-6
+                    img
+                        margin-bottom: 1.5rem
+                        height: 15rem
+                        object-fit: cover
+
+@include media-breakpoint-up(lg)
+    .page-wrapper
+        .container
+            .left-side
+                margin-top: 0
+            
+            .description
+                .description-box
+                    width: 75%
+            
+            .wrapper-second-row
+                margin-top: 1.5rem
+                .second-row
+                    img
+                        height: 13rem
+                        object-fit: cover
+                
+                .second-row:nth-child(2), .second-row:nth-child(3)
+                    margin-top: 0
+
+            .wrapper-third-row
+                margin-top: 1.5rem
+                .third-row
+                    img
+                        height: 15rem
+                        object-fit: cover
+                
+                .third-row:nth-child(2)
+                    margin-top: 0
+            
+            .wrapper-fourth-row, .wrapper-fiveth-row
+                margin-top: 1.5rem
+
+                .fourth-row:nth-child(2), .fourth-row:nth-child(3)
+                    margin-top: 0
+
+                .fiveth-row:nth-child(1)
+                    img
+                        height: 16rem
+                        object-fit: cover
+
+@include media-breakpoint-up(xl)
+    .page-wrapper
+        .container
+            .wrapper-second-row
+                margin-top: 1.5rem
+                .second-row
+                    img
+                        height: 20rem
+                        object-fit: cover
+                
+                .second-row:nth-child(2), .second-row:nth-child(3)
+                    margin-top: 0
+
+            .wrapper-third-row
+                margin-top: 1.5rem
+                .third-row
+                    img
+                        height: 20rem
+                        object-fit: cover
+                
+                .third-row:nth-child(2)
+                    margin-top: 0
+            
+            .wrapper-fourth-row, .wrapper-fiveth-row
+                margin-top: 1.5rem
+
+                .fourth-row:nth-child(2), .fourth-row:nth-child(3)
+                    margin-top: 0
+            
+            .wrapper-fiveth-row
+                margin-top: 1.5rem
+
+                .fiveth-row:nth-child(1), .fiveth-row:nth-child(2)
+                    img
+                        height: 20rem
+                        object-fit: cover
+
+@include media-breakpoint-up(xxl)
+.page-wrapper
+    .container
+        .wrapper-fourth-row, .wrapper-fiveth-row
+            .fiveth-row:nth-child(2)
+                margin-top: 0

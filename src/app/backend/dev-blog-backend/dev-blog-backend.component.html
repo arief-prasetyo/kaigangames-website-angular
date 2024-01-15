@@ -1,0 +1,200 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Dev Blog</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Dev Blog</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addPress">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add New Dev Blog
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="devblogtable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Dev Blog Title</th>
+                                            <th>Dev Blog Content</th>
+                                            <th>Dev Blog Tab</th>
+                                            <th>Dev Blog Source</th>
+                                            <th>Dev Blog Source Link</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of DevBlogData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.devblog_title}}</td>
+                                            <td [innerHTML]="data.devblog_content | htmldata"></td>
+                                            <td>{{data.tab_data_target}}</td>
+                                            <td>
+                                                <div *ngIf="data.devblog_source == 'internal'">
+                                                    <span class="badge text-bg-primary">{{data.devblog_source}}</span>
+                                                </div>
+                                                <div *ngIf="data.devblog_source == 'external'">
+                                                    <span class="badge text-bg-danger">{{data.devblog_source}}</span>
+                                                </div>                                                
+                                            </td>
+                                            <td>{{data.devblog_source_link}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info mb-2 w-100"  data-bs-toggle="modal" data-bs-target="#editPress" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!--end row
+        </div>
+    </div>
+    <!-end page wrapper -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="addPress" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Dev Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <div class="modal-body text-white">
+                        <div class="col-md-12 mb-2">
+                            <label for="devblog_title" class="form-label">Dev Blog Title</label>
+                            <input type="text" class="form-control" id="devblog_title" name="devblog_title" [(ngModel)]="DevBlogList.devblog_title" placeholder="Dev Blog Title ..." required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="devblog_content" class="form-label">Dev Blog Content</label>
+                            <textarea class="form-control" id="devblog_content" name="devblog_content" [(ngModel)]="DevBlogList.devblog_content" placeholder="Dev Blog Content ..." required></textarea>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="tab_data_target" class="form-label">Dev Blog Tab</label>
+                            <select class="form-select" aria-label="tab_data_target" name="tab_data_target" id="tab_data_target" [(ngModel)]="DevBlogList.tab_data_target" placeholder="Dev Blog Content" required>
+                                <option selected value="">Open this select menu</option>
+                                <option *ngFor="let item of DBTData" value="{{item.tab_data_target}}">{{item.tab_title}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="devblog_source" class="form-label">Dev Source</label>
+                            <select class="form-select" aria-label="devblog_source" id="devblog_source" name="devblog_source" [(ngModel)]="DevBlogList.devblog_source" placeholder="Dev Blog Source">
+                                <option selected value="">Open this select menu</option>
+                                <option value="internal" >Internal</option>
+                                <option value="external">External</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 SL" style="display: none;">
+                            <label for="devblog_source_link" class="form-label">Dev Blog Source Link</label>
+                            <input type="text" class="form-control" id="devblog_source_link" name="devblog_source_link" [(ngModel)]="DevBlogList.devblog_source_link" placeholder="Dev Blog Title ...">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal">Save Dev Blog</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editPress" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Dev Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="modal-body text-white">
+                        <div class="col-md-12 mb-2">
+                            <label for="devblog_title" class="form-label">Dev Blog Title</label>
+                            <input type="text" class="form-control" id="devblog_title" name="devblog_title" #devblog_title="ngModel" [(ngModel)]="editDevBlogForm.devblog_title" placeholder="Dev Blog Title ..." required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="devblog_content" class="form-label">Dev Blog Content</label>
+                            <textarea class="form-control" id="devblog_content" name="devblog_content" #devblog_content="ngModel" [(ngModel)]="editDevBlogForm.devblog_content" placeholder="Dev Blog Content ..." required></textarea>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="tab_data_target" class="form-label">Dev Blog Tab</label>
+                            <select class="form-select" aria-label="tab_data_target" name="tab_data_target" id="tab_data_target" [(ngModel)]="editDevBlogForm.tab_data_target" placeholder="Dev Blog Content" required>
+                                <option selected value="">Open this select menu</option>
+                                <option *ngFor="let item of DBTData" value="{{item.tab_data_target}}">{{item.tab_title}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="devblog_source" class="form-label">Dev Source</label>
+                            <select class="form-select" aria-label="devblog_source" id="devblog_source_1" name="devblog_source" [(ngModel)]="editDevBlogForm.devblog_source" placeholder="Dev Blog Source">
+                                <option selected value="">Open this select menu</option>
+                                <option value="internal" >Internal</option>
+                                <option value="external">External</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 SL" style="display: none;">
+                            <label for="devblog_source_link" class="form-label">Dev Blog Source Link</label>
+                            <input type="text" class="form-control" id="devblog_source_link" name="devblog_source_link" #devblog_source_link="ngModel" [(ngModel)]="editDevBlogForm.devblog_source_link" placeholder="Dev Blog Title ...">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        type="button"
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="updateData(id)">Update Dev Blog</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<!--start switcher-->
+<app-backend-switcher></app-backend-switcher>

@@ -1,0 +1,389 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+@font-face
+    font-family: "Grotesque"
+    src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/BrandonGrotesque-Regular.eot"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/BrandonGrotesque-Regular.ttf"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/BrandonGrotesque-Regular.woff")
+    font-weight: normal
+    font-display: swap
+
+@font-face
+    font-family: "Grotesque Black"
+    src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/BrandonGrotesque-Black.eot"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/BrandonGrotesque-Black.ttf"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/BrandonGrotesque-Black.woff")
+    font-weight: bold
+    font-display: swap
+
+.page-wrapper
+    .title
+        font-size: 2rem
+        font-weight: 700
+        color: #fff
+        text-transform: uppercase
+        text-align: left
+        padding-bottom: 1.5rem
+    
+    .box
+        .title
+            font-size: 1.3rem
+            color: #82788c
+            text-decoration: none
+            
+        .content
+            font-size: 1.25rem
+            color: white
+            text-decoration: none
+        
+        .date
+            font-size: 1.25rem
+            color: #82788c
+            text-decoration: none
+    
+    .wrapper:nth-child(1)
+        margin-top: 0
+        margin-bottom: 3rem
+    
+    .wrapper:nth-child(2),
+    .wrapper:nth-child(3),
+    .wrapper:nth-child(4),
+    .wrapper:nth-child(5),
+    .wrapper:nth-child(6),
+    .wrapper:nth-child(7),
+    .wrapper:nth-child(8),
+    .wrapper:nth-child(9),
+    .wrapper:nth-child(10)
+        margin-top: 3rem
+        margin-bottom: 3rem
+    
+    .date-left
+        background-color: rgb(33, 37, 41)
+        color: white
+        font-weight: bold
+        width: 100%
+        padding: .5rem .75rem
+        text-align: center
+    
+    .hr-1
+        margin-top: 3rem
+    
+    a.link
+        color: white !important
+        text-decoration: none !important
+
+        &:hover
+            color: #82788c
+
+    .float
+        position: fixed
+        width: 60px
+        height: 60px
+        bottom: 40px
+        right: 40px
+        background-color: cornflowerblue
+        color: #FFF
+        border-radius: 50px
+        text-align:ce nter
+        // box-shadow: 2px 2px 3px #999
+
+    .my-float
+        position: absolute
+        bottom: .3rem
+        left: 1rem
+        font-size: xx-large
+
+@include media-breakpoint-up(sm)
+    .page-wrapper
+        .title
+            font-size: 2rem
+            font-weight: 700
+            color: #fff
+            text-transform: uppercase
+            padding-bottom: 1.5rem
+        
+        .wrapper:nth-child(1)
+            margin-top: 0
+            margin-bottom: 3rem
+        
+        .wrapper:nth-child(2),
+        .wrapper:nth-child(3),
+        .wrapper:nth-child(4),
+        .wrapper:nth-child(5),
+        .wrapper:nth-child(6),
+        .wrapper:nth-child(7),
+        .wrapper:nth-child(8),
+        .wrapper:nth-child(9),
+        .wrapper:nth-child(10)
+            margin-top: 3rem
+            margin-bottom: 3rem
+
+        .date-left
+            background-color: rgb(33, 37, 41)
+            color: white
+            font-weight: bold
+            width: 100%
+            padding: .5rem .75rem
+            text-align: center
+
+        .box
+            .title
+                font-size: 1.3rem
+                color: #82788c
+                text-decoration: none
+                
+            .content
+                font-size: 1.25rem
+                color: white
+                text-decoration: none
+            
+            .date
+                font-size: 1.25rem
+                color: #82788c
+                text-decoration: none
+
+        .hr-1
+            margin-top: 3rem
+        
+        a.link
+            color: white !important
+            text-decoration: none !important
+
+            &:hover
+                color: #82788c
+
+@include media-breakpoint-up(md)
+    .page-wrapper
+        .title
+            font-size: 2rem
+            font-weight: 700
+            color: #fff
+            text-transform: uppercase
+            padding-bottom: 1.5rem
+        
+        .wrapper:nth-child(1)
+            margin-top: 0
+            margin-bottom: 3rem
+        
+        .wrapper:nth-child(2),
+        .wrapper:nth-child(3),
+        .wrapper:nth-child(4),
+        .wrapper:nth-child(5),
+        .wrapper:nth-child(6),
+        .wrapper:nth-child(7),
+        .wrapper:nth-child(8),
+        .wrapper:nth-child(9),
+        .wrapper:nth-child(10)
+            margin-top: 3rem
+            margin-bottom: 3rem
+
+        .date-left
+            background-color: rgb(33, 37, 41)
+            color: white
+            font-weight: bold
+            width: 100%
+            padding: .5rem .75rem
+            text-align: center
+
+        .box
+            .title
+                font-size: 1.3rem
+                color: #82788c
+                text-decoration: none
+                
+            .content
+                font-size: 1.25rem
+                color: white
+                text-decoration: none
+            
+            .date
+                font-size: 1.25rem
+                color: #82788c
+                text-decoration: none
+
+        .hr-1
+            margin-top: 3rem
+        
+        a.link
+            color: white !important
+            text-decoration: none !important
+
+            &:hover
+                color: #82788c
+
+@include media-breakpoint-up(lg)
+    .page-wrapper
+        .title
+            font-size: 2.3rem
+            font-weight: 700
+            color: #fff
+            text-transform: uppercase
+            padding-bottom: 1.5rem
+        
+        .wrapper:nth-child(1)
+            margin-top: 0
+            margin-bottom: 3rem
+        
+        .wrapper:nth-child(2),
+        .wrapper:nth-child(3),
+        .wrapper:nth-child(4),
+        .wrapper:nth-child(5),
+        .wrapper:nth-child(6),
+        .wrapper:nth-child(7),
+        .wrapper:nth-child(8),
+        .wrapper:nth-child(9),
+        .wrapper:nth-child(10)
+            margin-top: 3rem
+            margin-bottom: 3rem
+
+        .date-left
+            background-color: rgb(33, 37, 41)
+            color: white
+            font-weight: bold
+            width: 100%
+            padding: .5rem .75rem
+            text-align: center
+
+        .box
+            .title
+                font-size: 1.3rem
+                color: #82788c
+                text-decoration: none
+                
+            .content
+                font-size: 1.25rem
+                color: white
+                text-decoration: none
+            
+            .date
+                font-size: 1.25rem
+                color: #82788c
+                text-decoration: none
+
+        .hr-1
+            margin-top: 3rem
+        
+        a.link
+            color: white !important
+            text-decoration: none !important
+
+            &:hover
+                color: #82788c
+
+@include media-breakpoint-up(xl)
+    .page-wrapper
+        .title
+            font-size: 2.3rem
+            font-weight: 700
+            color: #fff
+            text-transform: uppercase
+            padding-bottom: 1.5rem
+        
+        .wrapper:nth-child(1)
+            margin-top: 0
+            margin-bottom: 3rem
+        
+        .wrapper:nth-child(2),
+        .wrapper:nth-child(3),
+        .wrapper:nth-child(4),
+        .wrapper:nth-child(5),
+        .wrapper:nth-child(6),
+        .wrapper:nth-child(7),
+        .wrapper:nth-child(8),
+        .wrapper:nth-child(9),
+        .wrapper:nth-child(10)
+            margin-top: 3rem
+            margin-bottom: 3rem
+
+        .date-left
+            background-color: rgb(33, 37, 41)
+            color: white
+            font-weight: bold
+            width: 100%
+            padding: .5rem .75rem
+            text-align: center
+
+        .box
+            .title
+                font-size: 1.3rem
+                color: #82788c
+                text-decoration: none
+                
+            .content
+                font-size: 1.25rem
+                color: white
+                text-decoration: none
+            
+            .date
+                font-size: 1.25rem
+                color: #82788c
+                text-decoration: none
+
+        .hr-1
+            margin-top: 3rem
+        
+        a.link
+            color: white !important
+            text-decoration: none !important
+
+            &:hover
+                color: #82788c
+              
+@include media-breakpoint-up(xxl)
+    .page-wrapper
+        color: white
+
+        .title
+            font-size: 2.3rem
+            font-weight: 700
+            color: #fff
+            text-transform: uppercase
+            padding-bottom: 1.5rem
+
+        .wrapper:nth-child(1)
+            margin-top: 0
+            margin-bottom: 3rem
+        
+        .wrapper:nth-child(2),
+        .wrapper:nth-child(3),
+        .wrapper:nth-child(4),
+        .wrapper:nth-child(5),
+        .wrapper:nth-child(6),
+        .wrapper:nth-child(7),
+        .wrapper:nth-child(8),
+        .wrapper:nth-child(9),
+        .wrapper:nth-child(10)
+            margin-top: 3rem
+            margin-bottom: 3rem
+
+        .date-left
+            background-color: rgb(33, 37, 41)
+            color: white
+            font-weight: bold
+            width: 100%
+            padding: .5rem .75rem
+            text-align: center
+
+        .box
+            .title
+                font-size: 1.3rem
+                color: #82788c
+                text-decoration: none
+                
+            .content
+                font-size: 1.25rem
+                color: white
+                text-decoration: none
+            
+            .date
+                font-size: 1.25rem
+                color: #82788c
+                text-decoration: none
+
+        .hr-1
+            margin-top: 3rem
+        
+        a.link
+            color: white !important
+            text-decoration: none !important
+
+            &:hover
+                color: #82788c

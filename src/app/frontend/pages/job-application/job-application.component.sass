@@ -1,0 +1,166 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+.container-fluid
+    .logo-and-text
+        .col-2
+            display: flex
+            justify-content: center
+            
+            .kaigan-logo
+                width: 75%
+            
+        .text
+            display: flex
+            align-items: center
+
+            .kaigan-text
+                width: 100%
+
+    .job-info
+        color: white
+        text-align: center
+
+        h5
+            margin-top: .5rem
+
+.wrapper-form
+    .card
+        --bs-card-border-color: transparent
+        padding-left: 15px
+        padding-right: 15px
+
+        .card-header
+            background-color: #c99bc5
+            color: black
+            font-weight: bold
+            font-size: 1.35rem
+
+        .card-body
+            background-color: #f7f7f7
+    
+    .card-1
+        padding-top: 15px
+        padding-bottom: 15px
+        margin-top: 1.5rem
+
+        .col-sm-12, .col-12:nth-child(2),
+        .col-sm-12, .col-12:nth-child(3),
+        .col-sm-12, .col-12:nth-child(4),
+        .col-sm-12, .col-12:nth-child(5),
+        .col-sm-12, .col-12:nth-child(6),
+        .col-sm-12, .col-12:nth-child(7),
+        .col-sm-12, .col-12:nth-child(8),
+        .col-sm-12, .col-12:nth-child(9)
+            margin-top: 1rem
+
+    .card-2
+        padding-bottom: 15px
+        padding-top: 15px
+        
+        .col-sm-12, .col-12:nth-child(1)
+            margin-top: 1rem
+
+        .col-sm-12, .col-12:nth-child(2),
+        .col-sm-12, .col-12:nth-child(3)
+            margin-top: 1rem
+
+        .btn
+            padding-left: 1.5rem
+            padding-right: 1.5rem
+
+@include media-breakpoint-up(sm)
+
+@include media-breakpoint-up(md)
+    .container-fluid
+        .logo-and-text
+            .col-md-3, .col-sm-3
+                display: flex
+                justify-content: center
+                
+                .kaigan-logo
+                    width: 100%
+                
+            .text
+                display: flex
+                align-items: center
+
+                .kaigan-text
+                    width: 100%
+
+        .job-info
+            color: white
+            text-align: center
+
+            h5
+                margin-top: .5rem
+
+@include media-breakpoint-up(lg)
+    .container-fluid
+        .left
+            display: flex
+            justify-content: center
+
+            .row
+                display: flex
+                align-items: center
+                margin-left: 1rem
+
+                .col-xxl-2, .col-xl-2, .col-lg-2
+                    display: flex
+                    justify-content: center
+                    
+                    .kaigan-logo
+                        width: 65%
+                
+                .text
+                    display: flex
+                    align-items: center
+
+                    .kaigan-text
+                        width: 100%
+        
+        .right
+            padding-right: 2.5rem
+            display: flex
+            align-items: center
+            justify-content: right
+
+            .job-info
+                color: white
+        
+@include media-breakpoint-up(xl)
+    .container-fluid
+        .left
+            display: flex
+            justify-content: center
+
+            .row
+                display: flex
+                align-items: center                
+
+                .col-xxl-2, .col-xl-2, .col-lg-2
+                    display: flex
+                    justify-content: center
+                    
+                    .kaigan-logo
+                        width: 65%
+                
+                .text
+                    display: flex
+                    align-items: center
+
+                    .kaigan-text
+                        width: 100%
+        
+        .right
+            padding-right: 2.5rem
+            display: flex
+            align-items: center
+            justify-content: right
+
+            .job-info
+                color: white
+
+@include media-breakpoint-up(xxl)

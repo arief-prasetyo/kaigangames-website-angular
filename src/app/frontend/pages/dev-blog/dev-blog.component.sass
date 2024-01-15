@@ -1,0 +1,114 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+h2.title
+    font-size: 2.3rem
+    font-weight: 700
+    color: #fff
+    text-transform: uppercase
+    padding-bottom: 3rem
+    text-align: center
+    
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show 
+    color: white
+    font-weight: 700
+    background-color: rgba(79,2,132,255)
+    border-color: wahitesmoke
+
+.nav-link
+    color: white
+    font-weight: 600
+
+#nav-tabContent
+    padding: 1.5rem 0
+
+.card
+    // border: 2px solid #2f4c47
+    --bs-card-bg: transparent
+    p
+        font-size: 1.25rem
+
+    .card-title
+        font-size: 1.3rem
+    
+::ng-deep 
+    .p-tabview .p-tabview-panels, 
+    .p-tabview .p-tabview-nav
+        background-color: transparent
+
+    .p-tabview 
+        .p-tabview-nav
+            display: flex
+            justify-content: flex-end
+
+    .p-tabview 
+        .p-tabview-nav 
+            li.p-highlight 
+                .p-tabview-nav-link
+                    background-color: rgba(79,2,132,255)
+                    color: white
+                    font-weight: 700
+                    padding: 1rem .75rem
+
+    .p-tabview 
+        .p-tabview-nav li 
+            .p-tabview-nav-link
+                background-color: transparent
+                color: white
+                font-weight: 700
+                border-top-right-radius: 6px
+                border-top-left-radius: 6px
+
+    .p-tabview 
+        .p-tabview-nav 
+            li:not(.p-highlight):not(.p-disabled):hover 
+                .p-tabview-nav-link
+                    background-color: transparent
+                    color: #8fefe2
+                    font-weight: 700
+    
+    .p-tabview .p-tabview-nav
+        background: transparent !important
+        border-bottom: 2px solid #dee2e6
+
+.tab-content
+    .card
+        border: 2px solid gray
+
+.p-tabview-panels
+    padding-left: 0 !important
+    padding-right: 0 !important
+
+.p-tabview .p-tabview-panels
+    background: #ffffff
+    padding: 1.25rem
+    border: 0 none
+    color: #495057
+    border-bottom-right-radius: 6px
+    border-bottom-left-radius: 6px
+
+.alert-info 
+    --bs-alert-color: #6edff6
+    --bs-alert-bg: #032830
+    --bs-alert-border-color: #087990
+    --bs-alert-link-color: #6edff6
+    margin-top: 1.25rem
+
+@include media-breakpoint-up(sm)
+
+@include media-breakpoint-up(md)
+    .content-wrapper
+        min-height: 65vh
+
+@include media-breakpoint-up(lg)
+    .content-wrapper
+        min-height: 63vh
+
+@include media-breakpoint-up(xl)
+    .content-wrapper
+        min-height: 65vh
+
+@include media-breakpoint-up(xxl)
+    .content-wrapper
+        min-height: 70vh

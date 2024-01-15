@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="container-fluid bg-black top-header pt-1 pb-1">
+    <div class="text-center">
+        <h1 class="mb-0">{{editOpenPosition.job_title}}</h1>
+    </div>
+</div>
+<div class="container-fluid page-wrapper">
+    <div class="container">
+        <div class="card rounded-0">
+            <div class="card-body">
+                <div class="aboutKaigan color-white" [innerHTML]="editOpenPosition.about_kaigangames | htmldata"></div>
+                <div class="wrapper-1 color-white">
+                    <h3>Job Description</h3>
+                    <div class="wrapper-2">
+                        <h5 class="TopTitle mt-3 mb-2">What we expect you to do:</h5>
+                        <div class="jobResponsibilities" [innerHTML]="editOpenPosition.job_responsibilities | htmldata"></div>
+                        <h5 class="TopTitle mt-4 mb-2" *ngIf="editOpenPosition.job_requirement != ''">What will make us to explore you more:</h5>
+                        <div class="jobRequirement" [innerHTML]="editOpenPosition.job_requirement | htmldata"></div>
+                        <div *ngIf="editOpenPosition.job_requirement_bonus_point != ''">
+                            <h5 class="TopTitle mt-4 mb-2">Would be nice if you have: </h5>
+                            <div class="jobRequirement" [innerHTML]="editOpenPosition.job_requirement_bonus_point | htmldata"></div>
+                        </div>
+                        <div *ngIf="editOpenPosition.job_benefits_and_perks != ''">
+                            <h5 class="TopTitle mt-4 mb-2">Benefit and perks: </h5>
+                            <div class="jobRequirement" [innerHTML]="editOpenPosition.job_benefits_and_perks | htmldata"></div>
+                        </div>
+                        <!-- <div *ngIf="editOpenPosition.current_project != ''">
+                            <h5 class="TopTitle mt-0 mb-2">Projects in the works that  you will be a part of:</h5>
+                            <div class="currentProject" [innerHTML]="editOpenPosition.current_project | htmldata"></div>
+                        </div> -->
+                    </div>
+                    <h3 class="mt-5">Additional Information</h3>
+                    <div class="wrapper-2">
+                        <div class="footer mt-4" [innerHTML]="editOpenPosition.footer | htmldata"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-footer">
+            <h3>Apply Now!</h3>
+            <div class="d-flex justify-content-center apply-button">
+                <a routerLink="/career/apply/job-id/{{editOpenPosition.id}}" target="_blank">
+                    <button class="btn btn-white">Submit</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

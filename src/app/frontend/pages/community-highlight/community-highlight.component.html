@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper ps-0 pe-0">
+    <img src="https://new-rest.kaigangames.com{{detailData.image_path}}" class="w-100 img-fluid top-banner" alt="Banner Image" loading="lazy">
+    <div class="content-wrapper">
+        <div class="d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-7 col-md-8 col sm-10 col-10">
+                <div class="row mt-5">
+                    <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 col-6 left">
+                        <p class="mb-0 date">{{detailData.createdAt | date: "MM/dd/y"}}</p>
+                    </div>
+                    <div class="col-xl-10 col-lg-8 col-md-6 col-sm-6 col-6 right">
+                        COMMUNITY
+                    </div>
+                </div>
+                <h1 class="text-left mt-5 mb-4">{{detailData.community_highlight_title}}</h1>
+                <div class="header-text" *ngFor="let item of communityData2; trackBy: trackByFn">
+                    <p [innerHTML]="item.chs_header_text | htmldata" class="chs_header_text"></p>
+                    <div class="mt-5">
+                        <h3>{{item.chs_name}}</h3>
+                    </div>
+                    <div class="mt-3">
+                        <p class="chs_header_text" [innerHTML]="item.chs_content | htmldata"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center content" *ngFor="let item of communityData; trackBy: trackByFn">
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-10">
+                <div class="mt-5 mb-5">
+                    <img src="https://new-rest.kaigangames.com{{item.image_path}}" class="img-fluid w-100" alt="Community Image" loading="lazy">
+                    <div class="link-wrapper">
+                        Via <a href="{{item.maker_link}}" class="mt-3 mb-5" target="_blank" rel="noopener">@{{item.maker_name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

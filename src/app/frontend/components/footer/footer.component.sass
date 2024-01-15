@@ -1,0 +1,222 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+.footer-container
+    color: white
+    font-weight: bold
+
+    .top-section
+        padding-bottom: 1.5rem
+        padding-top: 15px
+
+        .community-text
+            font-size: 22px
+            font-weight: bold
+            margin-bottom: 0
+            text-align: center
+
+        .breadcrumb-icon
+            color: white
+            font-size: 2rem
+
+        .social-wrapper
+            padding-top: .5rem
+            width: 75%
+            .col-6, .col-sm-6
+                padding-bottom: .75rem
+                .social-icon
+                    width: 65%
+            
+            .col-6:nth-child(6), .col-sm-6:nth-child(6)
+                display: block
+
+        .d-grid
+            .btn-discord
+                background-color: #7289da
+                color: white
+                font-weight: bold
+
+            .btn-twitter
+                background-color: #1DA1F2
+                color: white
+                font-weight: bold
+
+            .btn-facebook
+                background-color: #4267B2
+                color: white
+                font-weight: bold
+
+            .btn-instagram
+                background-image: linear-gradient(to bottom,  #4f5bd5 0%, #962fbf  20%, #d62976 40%, #fa7e1e 60%, #feda75 100%)
+                color: white
+                font-weight: bold
+                border-style: initial
+
+            .btn-youtube
+                background-color: #FF0000
+                color: white
+                font-weight: bold
+
+    .bottom-section
+        background-color: #000000
+        .kaigan-logo
+            width: 20%
+            margin-left: 0
+
+        .kaigan-text
+            height: 50px
+            margin-left: 0
+            padding-left: 0
+            width: 100%
+
+        .footer-nav
+            background-color: #000000
+            .nav-item
+                a
+                    color: white
+
+            .footer-menu
+                margin-bottom: 0
+                padding: 10px 0
+                .footer-item
+                    display: flow-root
+                    padding: 0 10px
+                    text-align: center
+                    .footer-link
+                        text-decoration: none
+                        color: white
+                        font-size: 1rem
+
+        .bottom-text
+            font-size: .75rem
+
+@include media-breakpoint-up(sm)
+
+@include media-breakpoint-up(md)
+    .footer-container
+        .top-section
+            .social-wrapper
+                padding-top: .5rem
+
+                .col-md-2
+                    padding-bottom: .75rem
+                    .social-icon
+                        width: 100%
+
+                .col-md-2:nth-child(6)
+                    display: none
+
+        .bottom-section
+            .kaigan-logo
+                width: 10%
+                margin-left: 0
+
+            .footer-nav
+                .footer-menu
+                    .footer-item
+                        display: inline
+
+@include media-breakpoint-up(lg)
+    .footer-container
+        .top-section
+            padding-bottom: 1.5rem
+            
+            .community-text
+                font-size: 24px
+                font-weight: bold
+                margin-bottom: 0
+                
+            .social-wrapper
+                .col-md-2
+                    padding-bottom: .75rem
+                    .social-icon
+                        width: 100%
+
+                .col-lg-2:nth-child(6)
+                    display: none
+
+        .bottom-section
+            .kaigan-logo
+                width: 7%
+                
+            .footer-nav
+                .footer-menu
+                    .footer-item
+                        display: inline
+
+                        .footer-link
+                            font-size: 1.2rem
+
+            .bottom-text
+                font-size: 1rem
+
+@include media-breakpoint-up(xl)
+    .footer-container
+        .top-section
+            padding-bottom: 1.5rem
+
+            .community-text
+                font-size: 24px
+                font-weight: bold
+                margin-bottom: 0
+
+            .social-wrapper
+                .col-md-2
+                    padding-bottom: .75rem
+                    .social-icon
+                        width: 100%
+
+                .col-lg-2:nth-child(6)
+                    display: none
+
+        .bottom-section
+            .kaigan-logo
+                width: 7%
+                
+            .footer-nav
+                .footer-menu
+                    .footer-item
+                        display: inline
+
+                        .footer-link
+                            font-size: 1.2rem
+            
+            .bottom-text
+                font-size: 1rem
+
+@include media-breakpoint-up(xxl)
+    .footer-container
+        .top-section
+            padding-bottom: 1.5rem
+
+            .community-text
+                font-size: 24px
+                font-weight: bold
+                margin-bottom: 0
+
+            .social-wrapper
+                .col-md-2
+                    padding-bottom: .75rem
+                    .social-icon
+                        width: 100%
+
+                .col-lg-2:nth-child(6)
+                    display: none
+
+        .bottom-section
+            .kaigan-logo
+                width: 7%
+
+            .kaigan-text
+                height: 65px
+
+
+            .footer-nav
+                .footer-menu
+                    .footer-item
+                        .footer-link
+                            font-size: 1.2rem
+
+            .bottom-text
+                font-size: 1rem

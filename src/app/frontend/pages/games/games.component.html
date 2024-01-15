@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="card rounded-0 mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-12">
+                    <img fetchpriority="high" src="https://new-rest.kaigangames.com/{{gameDetailData.image_path}}" class="w-100" alt="{{gameDetailData.game_image}}">
+                    <hr>
+                    <h6 class="mb-0">Release Year:</h6>
+                    <p>{{gameDetailData.game_year}}</p>
+                    <h6 class="mb-0">Game Platform:</h6>
+                    <p>{{gameDetailData.game_platform}}</p>
+                    <h6 class="mb-0">Game Rating:</h6>
+                    <p>{{gameDetailData.game_rating}}</p>
+                    <div *ngIf="gameDetailData.game_rating == 'PEGI'; else elseBlock">
+                        <h6 class="mb-0">PEGI Rating:</h6>
+                        <p>{{gameDetailData.pegi_rating}}</p>
+                        <h6 class="mb-0">PEGI Content Descriptor:</h6>
+                        <p>{{gameDetailData.pegi_cd}}</p>
+                    </div>
+                    <ng-template #elseBlock>
+                        <h6 class="mb-0">ESRB Rating:</h6>
+                        <p>{{gameDetailData.esrb_rating}}</p>
+                    </ng-template>
+                </div>
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-7 col-12">
+                    <h4 class="text-center">{{gameDetailData.game_name }}</h4>
+                    <div class="gameDescription mt-3" [innerHTML]="gameDetailData.game_description | htmldata"></div>
+                    <hr>
+                    <div class="text-center embed_video" [innerHTML]="gameDetailData.URI | htmldata"></div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

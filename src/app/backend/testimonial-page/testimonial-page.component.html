@@ -1,0 +1,223 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Testimonials</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Testimonials</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addTestimonial">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add Testimonial
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableTestimonialData">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Front Image</th>
+                                            <th>User Image</th>
+                                            <th>Testimonial From</th>
+                                            <th>Testimonial</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of testimonialsData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.front_image}}</td>
+                                            <td>{{data.user_image}}</td>
+                                            <td>{{data.testimonial_from}}</td>
+                                            <td [innerHTML]="data.testimonial_text | htmldata"></td>
+                                            <td>{{data.user_name}}</td>
+                                            <td>{{data.user_position}}</td>
+                                            <td>
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info me-2 w-100 mb-2"  data-bs-toggle="modal" data-bs-target="#editTestimonial" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id, data.front_image, data.user_image)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!-- Create Modal -->
+    <div class="modal fade" id="addTestimonial" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Testimonial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <div class="modal-body text-white">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="image" class="form-label">Front Image</label>
+                                <input type="file" accept="image/*" class="form-control" id="front_image" name="front_image" [(ngModel)]="Testimonial.front_image" (change)="selectFile($event)" required/>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="image" class="form-label">User Image</label>
+                                <input type="file" accept="image/*" class="form-control" id="user_image" name="user_image" [(ngModel)]="Testimonial.user_image" (change)="selectFile2($event)" required/>
+                            </div>  
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <label for="title" class="form-label">Testimonial From</label>
+                            <select class="form-select" aria-label="Default select" id="testimonial_from" name="testimonial_from" [(ngModel)]="Testimonial.testimonial_from" required>
+                                <option selected>Open this select menu</option>
+                                <option value="Partner">Partner</option>
+                                <option value="Employee">Employee</option>
+                                <option value="Intern">Intern</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <label for="description" class="form-label">Testimonial</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="testimonial_text"
+                                name="testimonial_text"
+                                required
+                                [(ngModel)]="Testimonial.testimonial_text"
+                                required=""></editor>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-6">
+                                <label for="image" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="user_name" name="user_name" [(ngModel)]="Testimonial.user_name" placeholder="User name ..." required/>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="image" class="form-label">User Position</label>
+                                <input type="text" class="form-control" id="user_position" name="user_position" [(ngModel)]="Testimonial.user_position" placeholder="User position ..." required/>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal">Save Testimonial</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editTestimonial" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Testimonial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="image" class="form-label">Front Image</label>
+                            <input type="file" accept="image/*" class="form-control" id="front_image" #front_image="ngModel" name="front_image" [(ngModel)]="editTestimonial.front_image" (change)="selectFile($event)" required/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="image" class="form-label">User Image</label>
+                            <input type="file" accept="image/*" class="form-control" id="user_image" #user_image="ngModel" name="user_image" [(ngModel)]="editTestimonial.user_image" (change)="selectFile2($event)" required/>
+                        </div>  
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label for="title" class="form-label">Testimonial From</label>
+                        <select class="form-select" aria-label="Default select" id="testimonial_from" #testimonial_from="ngModel" name="testimonial_from" [(ngModel)]="editTestimonial.testimonial_from" required>
+                            <option selected>Open this select menu</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Employee">Employee</option>
+                            <option value="Intern">Intern</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label for="description" class="form-label">Testimonial</label>
+                        <editor 
+                            apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                            [init]="{ plugins: 'lists link image table code help wordcount'}"
+                            id="testimonial_text_edit"
+                            name="testimonial_text_edit"
+                            #testimonial_text_edit="ngModel"
+                            required
+                            [(ngModel)]="editTestimonial.testimonial_text"
+                            required=""></editor>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-6">
+                            <label for="image" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="user_name" name="user_name" #user_name="ngModel" [(ngModel)]="editTestimonial.user_name" placeholder="User name ..." required/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="image" class="form-label">User Position</label>
+                            <input type="text" class="form-control" id="user_position" name="user_position" #user_position="ngModel" [(ngModel)]="editTestimonial.user_position" placeholder="User position ..." required/>
+                        </div>  
+                    </div>
+                                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        type="button"
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="updateData(id)">Update Internship Perks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

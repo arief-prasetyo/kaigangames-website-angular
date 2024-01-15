@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper about-page-wrapper">
+    <!-- <img src="./assets/frontend/photos/KaiganGames3_FHD.webp" class="w-100 img-fluid" alt="Header Image" loading="lazy"> -->
+    <img [defaultImage]="defaultImage" [lazyLoad]="defaultImage" class="w-100 img-fluid" alt="Header Image"/>
+    <div class="container pt-0">
+        <div class="d-flex justify-content-center align-items-center top-text" data-aos="fade-up" data-aos-duration="1500">
+            <div class="box">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h1>We Make</h1>
+                        <h1 class="mb-5">Eye Opening Games</h1>
+                        <div *ngFor="let item of aboutData; trackBy: trackByFn">
+                            <p [innerHTML]="item.content | htmldata"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-indonesia-team></app-indonesia-team>
+        <app-our-values></app-our-values>
+        <app-meet-our-founders></app-meet-our-founders>
+        <div class="wrapper-awards" data-aos="fade-up" data-aos-duration="1500">
+            <h1>Awards & Nominations</h1>
+            <!-- visible from lg to xxl screen -->
+            <div class="d-none d-xxl-block d-xl-block d-lg-block">
+                <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfig" 
+                            (init)="slickInit($event)"
+                            (breakpoint)="breakpoint($event)">
+                    <div ngxSlickItem *ngFor="let item of awardImage; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+                        <img src="{{item.image}}" loading="lazy" class="w-100" alt="{{item.image}}">
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+            <!-- visible on md screen -->
+            <div class="d-none d-md-block d-lg-none">
+                <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfigMD" 
+                            (init)="slickInit($event)"
+                            (breakpoint)="breakpoint($event)">
+                    <div ngxSlickItem *ngFor="let item of awardImage; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+                        <img src="{{item.image}}" loading="lazy" class="w-100" alt="{{item.image}}">
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+            <!-- visible on sm screen -->
+            <div class="d-none d-sm-block d-md-none">
+                <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfigSM" 
+                            (init)="slickInit($event)"
+                            (breakpoint)="breakpoint($event)">
+                    <div ngxSlickItem *ngFor="let item of awardImage; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+                        <img src="{{item.image}}" loading="lazy" class="w-100" alt="{{item.image}}">
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+            <!-- visible on xs screen -->
+            <div class="d-block d-sm-none">
+                <ngx-slick-carousel class="carousel" 
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfigSM" 
+                            (init)="slickInit($event)"
+                            (breakpoint)="breakpoint($event)">
+                    <div ngxSlickItem *ngFor="let item of awardImage; let index=index; trackBy: trackByFn" data-aos="fade-up" data-aos-duration="1500" class="card-box slide">
+                        <img src="{{item.image}}" loading="lazy" class="w-100" alt="{{item.image}}">
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,367 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Career</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Career</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Benefit & Perks</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addBenefitAndPerks">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add Benefit and Perks
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableBNP">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Icon</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of BenefitPerksData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.icon}}</td>
+                                            <td>{{data.title}}</td>
+                                            <td>{{data.description}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info me-2 w-100"  data-bs-toggle="modal" data-bs-target="#EditBenefitAndPerks" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="addBenefitAndPerks" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Benefit and Perks</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body text-white">
+                        <div class="col-md-12 mb-3">
+                            <label for="inputBenefitPerksName" class="form-label">Benefit / Perks Icon</label>
+                            <div class="checkbox-item">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="bed"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio"  name="icon" [(ngModel)]="BenefitPerks.icon" value="bed" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faBed"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="person-pregnant"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="person-pregnant"  checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faPersonPregnant"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="suitcase-medical"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="suitcase-medical" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faSuitcaseMedical"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="glasses"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="glasses" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faGlasses"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="car"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="car" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faCar"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="hands-holding-circle"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="hands-holding-circle" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faHandHoldingCirlce"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="hands-holding-child"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="hands-holding-child" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faHandsHoldingChild"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="skull-crossbones"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="skull-crossbones" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faSkullCrossbones"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio" [(ngModel)]="BenefitPerks.icon" value="utensils"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon" [(ngModel)]="BenefitPerks.icon" value="utensils" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faUtensils"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputBenefitPerksName" class="form-label">Benefit / Perks Name</label>
+                            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="BenefitPerks.title" placeholder="Benefit / Perks Name ..." required>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <label for="inputBenefitPerksDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" [(ngModel)]="BenefitPerks.description" placeholder="Benefit and Perks Description ..." rows="3" required=""></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal"
+                            (click)="onSubmit()">Save Benefit Perks</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="EditBenefitAndPerks" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Benefit and Perks</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body text-white">
+                        <div class="col-md-12 mb-3">
+                            <label for="inputBenefitPerksName" class="form-label">Benefit / Perks Icon</label>
+                            <div class="checkbox-item">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="bed"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="bed" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faBed"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="person-pregnant"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="person-pregnant"  checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faPersonPregnant"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="suitcase-medical"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="suitcase-medical" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faSuitcaseMedical"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="glasses"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="glasses" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faGlasses"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="car"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="car" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faCar"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="hands-holding-circle"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="hands-holding-circle" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faHandHoldingCirlce"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="hands-holding-child"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="hands-holding-child" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faHandsHoldingChild"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="skull-crossbones"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="skull-crossbones" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faSkullCrossbones"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="radio_edit" [(ngModel)]="editCareerBenefitForm.icon" value="utensils"/>
+                                                <span class="radio-btn">
+                                                    <input type="radio" name="icon_edit" [(ngModel)]="editCareerBenefitForm.icon" value="utensils" checked />
+                                                    <div class="perks-icon">
+                                                        <fa-icon [icon]="faUtensils"></fa-icon>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputBenefitPerksName" class="form-label">Benefit / Perks Name</label>
+                            <input type="text" class="form-control" id="title" name="title" #title="ngModel" [(ngModel)]="editCareerBenefitForm.title" placeholder="Benefit / Perks Name ..." required>
+                        </div>
+                        <div class="col-12 mt-3 mt-3">
+                            <label for="inputBenefitPerksDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" #description [(ngModel)]="editCareerBenefitForm.description" placeholder="Benefit and Perks Description ..." rows="3" required=""></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            type="button"
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal"
+                            (click)="updateData(id)">Update Benefit and Perks</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

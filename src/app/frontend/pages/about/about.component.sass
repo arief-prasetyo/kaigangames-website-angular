@@ -1,0 +1,801 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+.page-wrapper
+    color: white
+    padding: 0
+
+    .container 
+        h1
+            margin-bottom: 3rem
+            font-size: 1.75rem
+
+    .img-header
+        position: relative
+        display: inline-block
+        margin-bottom: 1rem
+        color: white
+        background-image: url('../../../../assets/frontend/photos/KaiganGames3_FHD.webp')
+        background-size: cover
+        width: 100%
+        height: 22vh
+
+        span
+            position: absolute
+            bottom: -2.25rem
+            text-align: center
+            width: 100%
+            font-weight: bold
+            font-size: 1.25rem   
+            left: 0
+            color: white
+
+            &::before
+                display: inline-block
+                vertical-align: middle
+                height: 100%
+                content: ''  
+
+    .justify-content-center.top-text
+        padding-top: 3rem
+        padding-bottom: 3rem
+
+        .box
+            text-align: center
+
+            h1
+                margin-bottom: 1rem
+                text-transform: uppercase
+                font-weight: bold
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 1.5rem   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+
+            ::ng-deep
+                p
+                    width: 95%
+                    text-align: justify
+                    margin: auto
+                    font-size: 1.25rem
+                    margin-bottom: 1rem
+
+            .btn
+                font-weight: bold
+                padding-left: 2rem
+                padding-right: 2rem
+
+    .wrapper-our-values, .wrapper-we-aim-for
+        padding: 3rem 0
+
+        h1
+            text-align: center
+            text-transform: uppercase
+            font-weight: bold
+
+        .our-values
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+
+            span
+                position: absolute
+                text-align: center
+                height: 100%
+                width: 100%
+                font-weight: bold
+                font-size: 20px   
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''     
+
+    .wrapper-our-values
+        height: 31rem
+        padding: 5rem 30px
+
+        img
+            height: -webkit-fill-available
+            object-fit: cover
+        
+        .our-value-box
+            position: relative
+            bottom: 19em
+
+            .text
+                .our-value
+                    color: white
+                    font-size: 1.25rem
+                    font-weight: 700
+                    display: flex
+                    justify-content: center
+                    text-transform: capitalize
+                    line-height: 2.3rem
+                    text-shadow: 0px 2px 8px rgba(96,130,182,1)
+            
+            .text:nth-child(2)
+                margin-top: 2rem
+
+    .wrapper-we-aim-for
+        padding: 3rem 0
+
+        p
+            font-size: 20px  
+            text-align: justify
+
+        .col-12
+            margin-bottom: 1rem
+        
+        .col-12:nth-child(3)
+            margin-bottom: 0
+        
+        img.w-100
+            width: 80% !important
+    
+    .wrapper-life-at-kaigan
+        padding: 3rem 0
+        height: 100%
+
+        .left-side
+            h1
+                text-align: center
+                font-weight: bold
+                text-transform: uppercase
+            
+            p
+                text-align: justify
+
+    .wrapper-indonesian-team
+        .indonesianEmployee
+            margin-bottom: 1rem
+        
+        p
+            width: 95%
+            text-align: justify
+            margin: auto
+            font-size: 1.25rem
+            margin-bottom: 1rem
+            padding: 0 15px
+        
+        img.w-100
+            width: 80% !important
+
+    .wrapper-awards
+        padding-top: 3rem
+        padding-bottom: 3rem
+
+        h1
+            text-align: center
+            text-transform: uppercase
+            font-weight: bold
+
+        .slick-prev:before, .slick-next:before
+            font-size: 30px
+
+    ::ng-deep
+        .slick-prev
+            left: 0
+        
+        .slick-next
+            right: 10px
+
+@include media-breakpoint-up(sm)
+    .page-wrapper
+        .wrapper-life-at-kaigan
+            .right-side
+                .carousel-indicators
+                    bottom: -10%
+        
+        .img-header
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+            color: white
+
+            span
+                position: absolute
+                bottom: 5rem
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 1rem   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+            
+            img
+                background-image: linear-gradient(transparent, black)
+
+@include media-breakpoint-up(md)
+    .page-wrapper
+        .wrapper-life-at-kaigan
+            .left-side
+                .wrapper-carousel
+                    width: 100%
+
+                    .carousel-inner
+                        .carousel-item
+                            .text-and-button
+                                color: #fff
+                                font-size: 16px
+                                margin-top: .75rem
+                                text-align: justify
+
+                    .carousel-indicators
+                        bottom: -12%
+
+                        button
+                            height: 7px
+                            width: 110px
+
+            .right-side
+                h1
+                    text-align: right
+                    font-weight: bold
+                    text-transform: uppercase
+                
+                p
+                    text-align: justify
+
+        .img-header
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+            color: white
+            height: 50vh
+
+            span
+                position: absolute
+                bottom: -1rem
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 2.15rem   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+            
+            img
+                background-image: linear-gradient(transparent, black)
+
+        .wrapper-awards
+            padding-top: 5rem
+            padding-bottom: 5rem
+
+            .slick-slider
+                margin: auto
+                background: transparent
+                // background: rgb(14, 13, 13)
+                
+            body .slick-prev, 
+            body .slick-next
+                height: 35px
+                width: 30px
+                background: #575d59 !important
+                z-index: 100
+            
+            .slick-prev
+                left: -45px
+            
+            .slick-slide
+                margin: 0 5px
+            
+            .slick-prev:before, .slick-next:before
+                font-size: 30px
+
+            ::ng-deep
+                .slick-prev
+                    left: -15px
+                
+                .slick-next
+                    right: -5px
+
+        .wrapper-our-values
+            height: 25rem
+
+            img
+                height: -webkit-fill-available
+                object-fit: cover
+            
+            .our-value-box
+                position: relative
+                bottom: 12em
+
+                .text
+                    .our-value
+                        color: white
+                        font-size: 1.25rem
+                        font-weight: 700
+                        display: flex
+                        justify-content: center
+                        text-transform: capitalize
+                        line-height: 3rem
+                
+                .text:nth-child(2)
+                    margin-top: 2rem
+
+        .wrapper-indonesian-team, .wrapper-we-aim-for
+            img.w-100
+                width: 100% !important
+        
+        .justify-content-center.top-text
+            .box
+                h1
+                    text-align: center
+                    width: 100%
+                    font-weight: bold
+                    font-size: 2rem   
+                    left: 0
+                    color: white
+
+                    &::before
+                        display: inline-block
+                        vertical-align: middle
+                        height: 100%
+                        content: ''  
+            
+@include media-breakpoint-up(lg)
+    .page-wrapper
+        .wrapper-life-at-kaigan
+            .left-side
+                .wrapper-carousel
+                    width: 100%
+
+                    .carousel-inner
+                        .carousel-item
+                            .text-and-button
+                                color: #fff
+                                font-size: 16px
+                                margin-top: .75rem
+                                text-align: justify
+
+                    .carousel-indicators
+                        bottom: -10%
+
+                        button
+                            height: 7px
+                            width: 110px
+
+            .right-side
+                h1
+                    text-align: right
+                    font-weight: bold
+                    text-transform: uppercase
+                
+                p
+                    text-align: justify
+
+        .justify-content-center.top-text, 
+        .wrapper-our-values, 
+        .wrapper-we-aim-for, 
+        .wrapper-life-at-kaigan,
+        .wrapper-awards
+            padding-top: 5rem
+            padding-bottom: 5rem
+
+            .slick-slider
+                margin: auto
+                background: transparent
+                // background: rgb(14, 13, 13)
+                
+            body .slick-prev, 
+            body .slick-next
+                height: 45px
+                width: 40px
+                background: #575d59 !important
+                z-index: 100
+            
+            .slick-prev
+                left: -45px
+            
+            .slick-slide
+                margin: 0 5px
+            
+            .slick-prev:before, .slick-next:before
+                font-size: 35px
+
+            ::ng-deep
+                .slick-prev
+                    left: -25px
+                
+                .slick-next
+                    right: 0
+
+        .img-header
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+            color: white
+            height: 65vh
+
+            span
+                position: absolute
+                bottom: -1rem
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 2.5rem   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+            
+            img
+                background-image: linear-gradient(transparent, black)
+
+        .wrapper-our-values
+            height: 29rem
+
+            img
+                height: -webkit-fill-available
+                object-fit: cover
+            
+            .our-value-box
+                position: relative
+                bottom: 15em
+
+                .text
+                    .our-value
+                        color: white
+                        font-size: 1.5rem
+                        font-weight: 700
+                        display: flex
+                        justify-content: center
+                        text-transform: capitalize
+                        line-height: 4rem
+                
+                .text:nth-child(2)
+                    margin-top: 2rem
+
+        .wrapper-indonesian-team
+            .indonesianEmployee
+                margin-bottom: 1.5rem
+            
+            p
+                padding-left: 25px
+                padding-right: 25px
+
+        .wrapper-indonesian-team, .wrapper-we-aim-for
+            img.w-100
+                width: 100% !important
+
+        .justify-content-center.top-text
+            .box
+                h1
+                    text-align: center
+                    width: 100%
+                    font-weight: bold
+                    font-size: 2rem   
+                    left: 0
+                    color: white
+
+                    &::before
+                        display: inline-block
+                        vertical-align: middle
+                        height: 100%
+                        content: ''  
+
+@include media-breakpoint-up(xl)
+    .page-wrapper
+        .wrapper-life-at-kaigan
+            .left-side
+                .wrapper-carousel
+                    width: 100%
+
+                    .carousel-inner
+                        .carousel-item
+                            .text-and-button
+                                color: #fff
+                                font-size: 16px
+                                margin-top: .75rem
+                                text-align: justify
+
+                    .carousel-indicators
+                        bottom: -7%
+
+                        button
+                            height: 7px
+                            width: 110px
+
+            .right-side
+                h1
+                    text-align: right
+                    font-weight: bold
+                    text-transform: uppercase
+                
+                p
+                    text-align: justify
+
+        .img-header
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+            color: white
+            height: 100vh
+
+            span
+                position: absolute
+                bottom: -1rem
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 3rem   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+            
+            img
+                background-image: linear-gradient(transparent, black)
+
+        .wrapper-awards
+            padding-top: 5rem
+            padding-bottom: 5rem
+
+            .slick-slider
+                margin: auto
+                background: transparent
+                // background: rgb(14, 13, 13)
+                
+            body .slick-prev, 
+            body .slick-next
+                height: 45px
+                width: 40px
+                background: #575d59 !important
+                z-index: 100
+            
+            .slick-prev
+                left: -45px
+            
+            .slick-slide
+                margin: 0 5px
+            
+            .slick-prev:before, .slick-next:before
+                font-size: 40px
+
+            ::ng-deep
+                .slick-prev
+                    left: -45px
+                
+                .slick-next
+                    right: -25px
+
+        .wrapper-indonesian-team
+            .indonesianEmployee
+                margin-bottom: 1.5rem
+
+            p
+                font-size: 1.5rem
+                padding-left: 30px
+                padding-right: 30px
+        
+        .wrapper-our-values
+            height: 36rem
+
+            img
+                height: -webkit-fill-available
+                object-fit: cover
+            
+            .our-value-box
+                position: relative
+                bottom: 24em
+
+                .text
+                    .our-value
+                        color: white
+                        font-size: 1.85rem
+                        font-weight: 700
+                        display: flex
+                        justify-content: center
+                        text-transform: capitalize
+                        line-height: 7rem
+                
+                .text:nth-child(2)
+                    margin-top: 2rem
+
+        .justify-content-center.top-text
+            .box
+                ::ng-deep
+                    p
+                        width: 100%
+                        text-align: justify
+                        margin: auto
+                        font-size: 1.5rem
+                        margin-bottom: 1rem
+                
+                h1
+                    text-align: center
+                    width: 100%
+                    font-weight: bold
+                    font-size: 2rem   
+                    left: 0
+                    color: white
+
+                    &::before
+                        display: inline-block
+                        vertical-align: middle
+                        height: 100%
+                        content: ''  
+
+        .wrapper-indonesian-team, .wrapper-we-aim-for
+            img.w-100
+                width: 100% !important
+
+@include media-breakpoint-up(xxl)
+    .page-wrapper
+        .wrapper-life-at-kaigan
+            .left-side
+                .wrapper-carousel
+                    width: 100%
+
+                    .carousel-inner
+                        .carousel-item
+                            .text-and-button
+                                color: #fff
+                                font-size: 16px
+                                margin-top: .75rem
+                                text-align: justify
+
+                    .carousel-indicators
+                        bottom: -7%
+
+                        button
+                            height: 7px
+                            width: 110px
+
+            .right-side
+                h1
+                    text-align: right
+                    font-weight: bold
+                    text-transform: uppercase
+                
+                p
+                    text-align: justify
+
+        .img-header
+            position: relative
+            display: inline-block
+            margin-bottom: 1rem
+            color: white
+            height: 100vh
+
+            span
+                position: absolute
+                bottom: -1rem
+                text-align: center
+                width: 100%
+                font-weight: bold
+                font-size: 3rem   
+                left: 0
+                color: white
+
+                &::before
+                    display: inline-block
+                    vertical-align: middle
+                    height: 100%
+                    content: ''  
+            
+            img
+                background-image: linear-gradient(transparent, black)
+
+        .wrapper-awards
+            padding-top: 5rem
+            padding-bottom: 5rem
+
+            .slick-slider
+                margin: auto
+                background: transparent
+                // background: rgb(14, 13, 13)
+                
+            body .slick-prev, 
+            body .slick-next
+                height: 45px
+                width: 40px
+                background: #575d59 !important
+                z-index: 100
+            
+            .slick-prev
+                left: -45px
+            
+            .slick-slide
+                margin: 0 5px
+
+            ::ng-deep
+                .slick-prev:before, .slick-next:before
+                    font-size: 40px
+
+                .slick-prev
+                    left: -45px
+                
+                .slick-next
+                    right: -25px
+        
+        .wrapper-indonesian-team
+            .indonesianEmployee
+                margin-bottom: 1.5rem
+
+            p
+                font-size: 1.5rem
+                padding-left: 30px
+                padding-right: 30px
+        
+        .wrapper-our-values
+            height: 36rem
+
+            img
+                height: -webkit-fill-available
+                object-fit: cover
+            
+            .our-value-box
+                position: relative
+                bottom: 24em
+
+                .text
+                    .our-value
+                        color: white
+                        font-size: 1.85rem
+                        font-weight: 700
+                        display: flex
+                        justify-content: center
+                        text-transform: capitalize
+                        line-height: 7rem
+                
+                .text:nth-child(2)
+                    margin-top: 2rem
+
+        .justify-content-center.top-text
+            .box
+                ::ng-deep
+                    p
+                        width: 100%
+                        text-align: justify
+                        margin: auto
+                        font-size: 1.5rem
+                        margin-bottom: 1rem
+                
+                h1
+                    text-align: center
+                    width: 100%
+                    font-weight: bold
+                    font-size: 2rem   
+                    left: 0
+                    color: white
+
+                    &::before
+                        display: inline-block
+                        vertical-align: middle
+                        height: 100%
+                        content: ''  
+
+        .wrapper-indonesian-team, .wrapper-we-aim-for
+            img.w-100
+                width: 100% !important

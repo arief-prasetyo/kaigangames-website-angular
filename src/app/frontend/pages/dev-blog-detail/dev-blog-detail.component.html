@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="container-fluid page-wrapper">
+    <div class="content-wrapper">
+        <div class="container" *ngFor="let data of currentDevBlogData; trackBy: trackByFn">
+            <div class="card">
+                <div class="card-body">
+                    <p class="date fw-bold">{{data.createdAt | date: 'longDate'}}</p>
+                    <h5 class="card-title mt-5">{{data.devblog_title}}</h5>
+                    <p class="card-text">{{data.devblog_content}}</p>
+                </div>
+            </div>
+
+            <!-- <p class="date">{{data.createdAt | date: 'longDate'}}</p>
+            <div class="content-box mt-3">
+                <h2 class="content-title mb-3">{{data.devblog_title}}</h2>
+                <p class="content-text">{{data.devblog_content}}</p>
+            </div> -->
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

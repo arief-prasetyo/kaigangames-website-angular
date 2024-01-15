@@ -1,0 +1,368 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+// @import "./assets/backend/sass/icons.sass"
+// @import "./app/styles/about-components.sass"
+
+$navbarBG: #090c21
+$linkColor: #fbfdfe
+$activeLinkColor: #636363
+$hoverLinkColor: #636363
+$navbarLineColor: #803a9c
+
+$homeBGColor: #00060a
+
+@font-face
+  font-family: Roboto
+  src: url("./assets/font/Roboto/Roboto-Regular.ttf")
+  font-display: swap
+
+//backend
+.table
+    p
+        margin-bottom: 0 !important
+
+.table > :not(caption) > * > *
+    background-color: transparent !important
+    color: white !important
+    
+// metis menu backend
+.topbar-nav .metismenu a 
+    text-decoration: none
+
+.active-menu
+    background: rgb(255 255 255 / 15%) !important 
+//datatables
+div.dataTables_wrapper div.dataTables_info, 
+div.dataTables_wrapper div.dataTables_length label,
+div.dataTables_wrapper div.dataTables_filter label
+    color: white
+
+//tag input
+.ng2-tag-input__text-input
+    display: block
+    width: 100%
+    padding: 0.375rem 0.75rem
+    font-size: 1rem
+    font-weight: 400
+    line-height: 1.5
+    color: var(--bs-body-color)
+    background-color: var(--bs-form-control-bg)
+    background-clip: padding-box
+    border: var(--bs-border-width) solid var(--bs-border-color)
+    -webkit-appearance: none
+    appearance: none
+    border-radius: 0.375rem
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
+
+.form-select 
+  option
+    color: white
+    
+//frontend
+body
+  padding: 0
+  margin: 0
+  background-color: $homeBGColor
+  font-family: Roboto
+  font-size: 18px 
+  font-display: swap
+
+// p
+//   font-size: 18px !important
+
+.frontend-navbar
+  background-color: $navbarBG
+  // border-bottom: 7px solid $navbarLineColor
+
+  .navbar-collapse
+      .nav-item
+          .nav-link
+              color: $linkColor
+              font-weight: bold
+              font-size: 18px
+              text-transform: uppercase
+              padding-bottom: .5rem
+
+              &:hover
+                  color: $hoverLinkColor
+
+          .active
+              color: $activeLinkColor !important
+              text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #55B3D7, 0 0 82px #55B3D7, 0 0 92px #55B3D7, 0 0 102px #55B3D7, 0 0 151px #55B3D7 
+
+          .nav-link:nth-child(1)
+              padding: 0 1.5rem
+  .navbar-brand
+      .kaigan-logo
+          width: 19%
+          margin-left: 0
+
+      .kaigan-text
+          height: 50px
+          margin-left: 0
+          padding-left: 0
+          width: 35%
+
+  .navbar-nav
+    .nav-item
+      text-align: center
+      
+.container-fluid.page-wrapper
+  background: url("./assets/frontend/Banner/kaiganweb_bg.webp")
+  background-position: center
+  background-size: cover
+  margin-top: 0
+
+.footer-container
+  background-color: $navbarBG
+
+//backend
+.page-content
+  min-height: 57rem !important
+  table
+    tr
+      font-size: medium
+
+// metis menu backend
+.topbar-nav .metismenu a 
+    text-decoration: none
+
+.active-menu
+    background: rgb(255 255 255 / 15%) !important 
+    
+.page-content
+    //breadcrumb
+    .page-breadcrumb
+        .breadcrumb-title
+            color: white !important
+        
+        .breadcrumb-icon
+            color: white
+
+        .active, .text-uppercase
+            color: white 
+
+    .breadcrumb-item + .breadcrumb-item::before
+        content: none !important
+    
+    hr
+        color: white
+    
+    .text-uppercase
+        color: white 
+
+    .table
+        thead.table-light
+            --bs-table-bg: rgb(255 255 255 / 15%)
+            color: #fff
+            border-color: rgb(255 255 255 / 15%)
+
+        tbody
+            .form-check-input
+                background-color: rgb(255 255 255 / 15%)
+                border: 1px solid rgb(255 255 255 / 15%)
+
+            td
+                color: white
+            
+            .bg-light
+                background-color: rgb(255 255 255 / 15%)!important 
+    
+    .card
+        background-color: rgb(0 0 0 / 20%)  
+        box-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 12%)    
+        margin-bottom: 1.5rem   
+        border: 0 solid transparent 
+
+    .form-control
+        color: #ffffff  
+        background-color: rgb(0 0 0 / 15%)  
+        border: 1px solid rgb(255 255 255 / 15%)   
+
+    .list-group
+        --bs-list-group-bg: transparent
+
+        .list-group-item
+            color: white
+
+            p
+                margin-bottom: 0 !important
+
+    .text-white
+        color: white
+
+    .modal-header .btn-close
+        margin: 0
+
+    div.dataTables_wrapper div.dataTables_info
+        padding-top: .85em
+        color: white
+
+.page-footer
+    background: rgb(0 0 0 / 20%)
+    position: fixed
+    bottom: 0em
+    left: 0px
+    right: 0
+    text-align: center
+    padding: 7px
+    color: #fff
+    font-size: 14px
+    border-top: 1px solid rgb(255 255 255 / 15%)
+    z-index: 3
+
+//datatables
+div.dataTables_wrapper div.dataTables_info, 
+div.dataTables_wrapper div.dataTables_length label,
+div.dataTables_wrapper div.dataTables_filter label
+    color: white
+
+//tag input
+.ng2-tag-input__text-input
+    display: block
+    width: 100%
+    padding: 0.375rem 0.75rem
+    font-size: 1rem
+    font-weight: 400
+    line-height: 1.5
+    color: var(--bs-body-color)
+    background-color: var(--bs-form-control-bg)
+    background-clip: padding-box
+    border: var(--bs-border-width) solid var(--bs-border-color)
+    -webkit-appearance: none
+    appearance: none
+    border-radius: 0.375rem
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
+
+//burger menu
+.nav-icon2
+  width: 35px
+  height: 45px
+  position: relative
+  -webkit-transform: rotate(0deg)
+  -moz-transform: rotate(0deg)
+  -o-transform: rotate(0deg)
+  transform: rotate(0deg)
+  -webkit-transition: .5s ease-in-out
+  -moz-transition: .5s ease-in-out
+  -o-transition: .5s ease-in-out
+  transition: .5s ease-in-out
+  cursor: pointer
+
+.nav-icon2 span
+  display: block
+  position: absolute
+  height: 3.5px
+  width: 50%
+  background: white
+  opacity: 1
+  -webkit-transform: rotate(0deg)
+  -moz-transform: rotate(0deg)
+  -o-transform: rotate(0deg)
+  transform: rotate(0deg)
+  -webkit-transition: .25s ease-in-out
+  -moz-transition: .25s ease-in-out
+  -o-transition: .25s ease-in-out
+  transition: .25s ease-in-out
+
+.nav-icon2 span:nth-child(even)
+  left: 45%
+  border-radius: 0 9px 9px 0
+
+.nav-icon2 span:nth-child(odd)
+  left:0px
+  border-radius: 9px 0 0 9px
+
+.nav-icon2 span:nth-child(1), .nav-icon2 span:nth-child(2)
+  top: 0px
+
+.nav-icon2 span:nth-child(3), .nav-icon2 span:nth-child(4)
+  top: 10px
+
+.nav-icon2 span:nth-child(5), .nav-icon2 span:nth-child(6)
+  top: 20px
+
+.nav-icon2.open span:nth-child(1),.nav-icon2.open span:nth-child(6)
+  -webkit-transform: rotate(45deg)
+  -moz-transform: rotate(45deg)
+  -o-transform: rotate(45deg)
+  transform: rotate(45deg)
+
+.nav-icon2.open span:nth-child(2),.nav-icon2.open span:nth-child(5)
+  -webkit-transform: rotate(-45deg)
+  -moz-transform: rotate(-45deg)
+  -o-transform: rotate(-45deg)
+  transform: rotate(-45deg)
+
+.nav-icon2.open span:nth-child(1)
+  left: 5px
+  top: 15px
+
+.nav-icon2.open span:nth-child(2)
+  left: calc(50% - 5px)
+  top: 15px
+
+.nav-icon2.open span:nth-child(3)
+  left: -50%
+  opacity: 0
+
+.nav-icon2.open span:nth-child(4)
+  left: 100%
+  opacity: 0
+
+.nav-icon2.open span:nth-child(5)
+  left: 5px
+  top: 22px
+
+.nav-icon2.open span:nth-child(6)
+  left: calc(50% - 5px)
+  top: 22px
+
+.navbar-toggler
+  border: 1px solid transparent !important
+  outline: none
+  margin-top: 10px
+
+// .navbar-toggler:focus,
+// .navbar-toggler-icon:focus
+//   outline: none
+//   box-shadow: none
+//   border-style: none
+//   margin-top: 10px
+
+p.MsoListParagraphCxSpFirst, p.MsoListParagraphCxSpMiddle, p.MsoListParagraphCxSpLast
+  margin-bottom: 0
+
+.color-white
+  color: white  
+
+.hide
+  display: none
+
+.block
+  display: block
+
+.w-85
+  width: 85% !important
+
+.navbar-toggler
+  border: none
+  outline: none
+  box-shadow: none
+
+  &:focus,
+  &:active,
+  &-icon:focus
+    outline: none
+    box-shadow: none
+   
+
+.navbar-toggler:focus,
+.navbar-toggler-icon:focus
+  // outline: none
+  // box-shadow: none
+  margin-top: 10px
+
+.page-wrapper .container
+    padding: 5rem 15px

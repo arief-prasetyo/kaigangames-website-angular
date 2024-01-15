@@ -1,0 +1,456 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Career</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Career</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Open Position</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOpenPosition">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add Open Position
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableOP">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Job Title</th>
+                                            <th>Group Position</th>
+                                            <th>Job Location</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of OpenPositionData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.job_title}}</td>
+                                            <td>{{data.group_position}}</td>
+                                            <td>{{data.job_location}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary me-2 mb-2 w-100"  data-bs-toggle="modal" data-bs-target="#detailOP" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faSearch"></fa-icon>
+                                                    Detail
+                                                </a>
+                                                <a class="btn btn-sm btn-info me-2 mb-2 w-100"  data-bs-toggle="modal" data-bs-target="#EditOP" (click)="editData(data.id)">
+                                                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm btn-danger w-100" (click)="confirmBox(data.id)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="addOpenPosition" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Open Position</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="jobTitle" class="form-label">Job Title</label>
+                                <input type="text" class="form-control" id="job_title" name="job_title" [(ngModel)]="OpenPosition.job_title" placeholder="Job Title ..." required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="jobLocation" class="form-label">Job Location</label>
+                                <input type="text" class="form-control" id="job_location" name="job_location" [(ngModel)]="OpenPosition.job_location" placeholder="Job Location ..." required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="groupposition" class="form-label">Group Position</label>
+                                <select class="form-select" name="group_position" id="group_position" [(ngModel)]="OpenPosition.group_position" required>
+                                    <option selected>Open this select menu</option>
+                                    <option *ngFor="let item of GroupOpenPositionData" value="{{item.group_position}}">{{item.group_position}}</option>
+                                  </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="typecontact" class="form-label">Type of Work Contract</label>
+                                <select class="form-select"  name="type_of_work_contract" id="type_of_work_contract" [(ngModel)]="OpenPosition.type_of_work_contract" required="">
+                                    <option selected>Open this select menu</option>
+                                    <option value="Full Time">Full Time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Internship">Internship</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Header</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="about_kaigangames"
+                                required
+                                [(ngModel)]="OpenPosition.about_kaigangames"
+                                name="about_kaigangames"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Responsibilities</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_responsibilities"
+                                required
+                                [(ngModel)]="OpenPosition.job_responsibilities"
+                                name="job_responsibilities"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Requirement</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_requirement"
+                                required
+                                [(ngModel)]="OpenPosition.job_requirement"
+                                name="job_requirement"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Requirement (Bonus Point)</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_requirement_bonus_point"
+                                required
+                                [(ngModel)]="OpenPosition.job_requirement_bonus_point"
+                                name="job_requirement_bonus_point"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Benefit and Perks</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_benefits_and_perks"
+                                required
+                                [(ngModel)]="OpenPosition.job_benefits_and_perks"
+                                name="job_benefits_and_perks"></editor>
+                        </div>
+                        <!-- <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Current Project(s)</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="current_project"
+                                required
+                                [(ngModel)]="OpenPosition.current_project"
+                                name="current_project"></editor>
+                        </div> -->
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Footer</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="footer"
+                                required
+                                [(ngModel)]="OpenPosition.footer"
+                                name="footer"></editor>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="onSubmit()">Save Group Open Position</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- detail modal -->
+    <div class="modal fade" id="detailOP" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Detail Open Position</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Job Title</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editOpenPosition.job_title}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Job Location</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editOpenPosition.job_location}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Group Position</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">{{editOpenPosition.group_position}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Type of Work Contract</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0">
+                                    <div *ngIf='editOpenPosition.type_of_work_contract == "Full Time"'>
+                                        <span class="badge text-bg-success">{{editOpenPosition.type_of_work_contract}}</span>
+                                    </div>
+                                    <div *ngIf='editOpenPosition.type_of_work_contract == "Contract"'>
+                                        <span class="badge text-bg-primary">{{editOpenPosition.type_of_work_contract}}</span>
+                                    </div>
+                                    <div *ngIf='editOpenPosition.type_of_work_contract == "Internship"'>
+                                        <span class="badge text-bg-secondary">{{editOpenPosition.type_of_work_contract}}</span>
+                                    </div>
+                                    <div *ngIf='editOpenPosition.type_of_work_contract == "Other"'>
+                                        <span class="badge text-bg-light">{{editOpenPosition.type_of_work_contract}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Header</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.about_kaigangames | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Job Responsibilities</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.job_responsibilities | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Job Requirement</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.job_requirement | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Job Requirement (Bonus Point)</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.job_requirement_bonus_point | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Job Benefit and Perks</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.job_benefits_and_perks | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Current Project</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.current_project | htmldata"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-5">Footer</div>
+                                <div class="col-lg-1 col-md-1" style="width: 2.333%">:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-6 pl-0" [innerHTML]="editOpenPosition.footer | htmldata"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="EditOP" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Open Position</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="jobTitle" class="form-label">Job Title</label>
+                                <input type="text" class="form-control" id="job_title" name="job_title" #job_title="ngModel" [(ngModel)]="editOpenPosition.job_title" placeholder="Job Title ..." required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="jobLocation" class="form-label">Job Location</label>
+                                <input type="text" class="form-control" id="job_location" name="job_location" #job_location="ngModel" [(ngModel)]="editOpenPosition.job_location" placeholder="Job Location ..." required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="jobLocation" class="form-label">Group Position</label>
+                                <select class="form-select" name="group_position" id="group_position" #group_position="ngModel" [(ngModel)]="editOpenPosition.group_position" required>
+                                    <option selected>Open this select menu</option>
+                                    <option *ngFor="let item of GroupOpenPositionData" value="{{item.group_position}}">{{item.group_position}}</option>
+                                  </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="typecontact" class="form-label">Type of Work Contract</label>
+                                <select class="form-select"  name="type_of_work_contract" id="type_of_work_contract" #type_of_work_contract [(ngModel)]="editOpenPosition.type_of_work_contract" required="">
+                                    <option selected>Open this select menu</option>
+                                    <option value="Full Time">Full Time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Internship">Internship</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Header</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="about_kaigangamesEdit"
+                                #about_kaigangamesEdit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.about_kaigangames"
+                                name="about_kaigangames"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Responsibilities</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_responsibilitiesEdit"
+                                #job_responsibilitiesEdit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.job_responsibilities"
+                                name="job_responsibilities"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Requirement</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_requirementEdit"
+                                #job_requirementEdit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.job_requirement"
+                                name="job_requirement"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Requirement (Bonus Point)</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_requirement_bonus_point_edit"
+                                #job_requirement_bonus_point_edit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.job_requirement_bonus_point"
+                                name="job_requirement_bonus_point"></editor>
+                        </div>
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Job Benefit and Perks</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_benefits_and_perks_edit"
+                                #job_benefits_and_perks_edit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.job_benefits_and_perks"
+                                name="job_benefits_and_perks"></editor>
+                        </div>
+                        <!-- <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Current Project(s)</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="current_project_edit"
+                                #current_project_edit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.current_project"
+                                name="current_project"></editor>
+                        </div> -->
+                        <div class="mt-3">
+                            <label for="jobLocation" class="form-label">Footer</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="footer_edit"
+                                #footer_edit="ngModel"
+                                required
+                                [(ngModel)]="editOpenPosition.footer"
+                                name="footer"></editor>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button
+                        type="button"
+                        class="btn btn-dark btn-sm"
+                        data-bs-dismiss="modal"
+                        (click)="updateData(id)">Update Group Open Position</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>

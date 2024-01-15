@@ -1,0 +1,44 @@
+@import 'node_modules/bootstrap/scss/functions'
+@import 'node_modules/bootstrap/scss/variables'
+@import 'node_modules/bootstrap/scss/mixins'
+
+.logout
+    cursor: pointer
+
+.profile
+    font-size: 22px
+
+.dropdown-menu
+    background-color: #1e1e1e 
+    color: white
+    -webkit-box-shadow: 0.5rem 1rem rgba(0, 0, 0, .15)
+    box-shadow: 0.5rem 1rem rgba(0, 0, 0, .15)
+
+    li
+        background-color: #1e1e1e 
+        
+        &:hover
+            background-color: rgb(255 255 255 / 15%)
+
+        a
+            &:hover
+                background-color: rgb(255 255 255 / 15%)
+
+.dropdown-item
+    color: white
+
+
+@include media-breakpoint-up(sm)
+
+@include media-breakpoint-up(md)
+
+@include media-breakpoint-up(lg)
+    // .sidebar-wrapper
+    //     left: -300px !important
+    //     box-shadow: none
+    //     background: rgb(23, 23, 23)
+    
+
+@include media-breakpoint-up(xl)
+
+@include media-breakpoint-up(xxl)

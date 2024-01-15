@@ -1,0 +1,178 @@
+<!--wrapper-->
+<div class="wrapper">
+    <app-backend-header></app-backend-header>
+    <app-backend-navigations></app-backend-navigations>
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Career</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">
+                                    <fa-icon [icon]="faHomeAlt" class="breadcrumb-icon"></fa-icon>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Career</li>
+                            <li class="breadcrumb-item">
+                                <fa-icon [icon]="faChevronRight" class="breadcrumb-icon"></fa-icon>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Featured Jobs</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addFeaturedJob">
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add Featured Job
+                    </button>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+                    <hr/>
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table">
+                                <table class="table mb-0 align-middle" id="datatableFJ">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Job Title</th>
+                                            <th>Job Location</th>
+                                            <th>Job Description</th>
+                                            <th>Image</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of FeaturedJobData; let i = index">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>{{data.job_title}}</td>
+                                            <td>{{data.job_location}}</td>
+                                            <td [innerHTML]="data.job_description | htmldata"></td>
+                                            <td>{{data.image}}</td>
+                                            <td class=" w-25">
+                                                {{data.createdAt | date: 'fullDate'}}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger" (click)="confirmBox(data.id, data.image)">
+                                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="addFeaturedJob" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Add New Featured Job</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body text-white">
+                        <div class="col-md-12">
+                            <label for="inputBenefitPerksName" class="form-label">Job Title</label>
+                            <input type="text" class="form-control" id="job_title" name="job_title" [(ngModel)]="FeaturedJob.job_title" placeholder="Job Title ..." required>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Job Location</label>
+                            <input type="text" class="form-control" id="job_location" name="job_location" [(ngModel)]="FeaturedJob.job_location" placeholder="Job Location ..." required>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Job Description</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                id="job_description"
+                                required
+                                [(ngModel)]="FeaturedJob.job_description"
+                                name="job_description"></editor>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Job Image</label><br>
+                            <input type="file" class="form-control" accept="image/*" id="image" name="image" [(ngModel)]="FeaturedJob.image" (change)="selectFile($event)"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal"
+                            (click)="onSubmit()">Save Featured Job</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="EditBenefitAndPerks" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Edit Featured Job</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body text-white">
+                        <div class="col-md-12">
+                            <label for="inputBenefitPerksName" class="form-label">Job Title</label>
+                            <input type="text" class="form-control" id="job_title" name="job_title" #job_title="ngModel" [(ngModel)]="editCareerFeaturedJob.job_title" placeholder="Job Title ..." required>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Job Location</label>
+                            <input type="text" class="form-control" id="job_location" name="job_location" #job_location="ngModel" [(ngModel)]="editCareerFeaturedJob.job_location" placeholder="Job Location ..." required>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Job Description</label>
+                            <editor 
+                                apiKey="8fmhf5ag7w69r6yqybyor3z3xyh9bdyqr9h4k4zd6e1icumy" 
+                                [init]="{ plugins: 'lists link image table code help wordcount'}"
+                                
+                                #job_description="ngModel"
+                                required
+                                [(ngModel)]="editCareerFeaturedJob.job_description"
+                                name="job_description"></editor>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label for="inputBenefitPerksName" class="form-label">Job Image</label><br>
+                            <input type="file" accept="image/*" id="image" name="image" #image="ngModel" [(ngModel)]="editCareerFeaturedJob.image">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button
+                            type="button"
+                            class="btn btn-dark btn-sm"
+                            data-bs-dismiss="modal"
+                            (click)="updateData(id)">Update Featured Job</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> 
+    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <app-backend-footer></app-backend-footer>
+</div>
+<!--end wrapper-->
+<app-backend-switcher></app-backend-switcher>
