@@ -45,6 +45,9 @@ export class ThreejslogoComponent {
     dracoLoader.preload();
     this.loader.setDRACOLoader( dracoLoader );
     let base = new THREE.Object3D();
+    //cast shadow
+    base.castShadow = true;
+    base.receiveShadow = false;
     scene.add(base);
     // Load a glTF resource
     this.loader.load(
@@ -104,6 +107,18 @@ export class ThreejslogoComponent {
     pointLight.position.z = 2;
     scene.add(pointLight);
 
+    //light
+    const light = new THREE.DirectionalLight(0xfffff, 1);
+    light.position.set(0,1,0);
+    light.castShadow = true;
+    scene.add(light)
+
+    //Set up shadow properties for the light
+    light.shadow.mapSize.width = 512; // default
+    light.shadow.mapSize.height = 512; // default
+    light.shadow.camera.near = 0.5; // default
+    light.shadow.camera.far = 500; // default
+
     //check canvas
     if (!canvas) {
       return;
@@ -116,6 +131,8 @@ export class ThreejslogoComponent {
       antialias:true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    //shadow map
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     renderer.setAnimationLoop(() => {
       if (resize(renderer)) {
