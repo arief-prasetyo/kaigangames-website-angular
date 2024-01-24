@@ -9,6 +9,7 @@ import { NavbarModule } from '../../components/navbar/navbar.module';
 import { PipeSharedModuleModule } from 'src/app/pipe/pipe-shared-module/pipe-shared-module.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ThreeJsOnMobileModule } from '../../threejs/three-js-on-mobile/three-js-on-mobile.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CommonModule,
     HomeRoutingModule,
     ThreejslogoModule,
+    ThreeJsOnMobileModule,
     SlickCarouselModule,
     FontAwesomeModule,
     PipeSharedModuleModule,

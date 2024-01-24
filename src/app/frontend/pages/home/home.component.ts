@@ -5,6 +5,7 @@ import { GameList } from 'src/app/models/backend/game-list.model';
 import { Testimonials } from 'src/app/models/backend/testimonials.model';
 import { BackendService } from 'src/app/services/backend.service';
 import { AngularFaviconService } from 'angular-favicon';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import * as AOS from 'aos';
 import * as $ from 'jquery';
 
@@ -22,6 +23,8 @@ export class HomeComponent {
   testimonialsData?: Testimonials[];
   testimonialsData2?: Testimonials[];
   aboutData?: About[];
+  visibilityDesktop = false;
+  visibilityMobile = false;
 
   slideConfig = {
     "slidesToShow": 3, "slidesToScroll": 1, "infinite": true, "dots": true, "autoplay": true, "autoplaySpeed": 3000
@@ -41,9 +44,11 @@ export class HomeComponent {
     // console.log('breakpoint');
   }
 
-  constructor(private backendService: BackendService, private ngxFavicon: AngularFaviconService){
+  constructor(private backendService: BackendService, private ngxFavicon: AngularFaviconService, private deviceDetector: DeviceDetectorService){
     $('body').removeClass("bg-theme2");  
     this.retrieveAbout();
+    this.getDeviceInfo();
+    this.getDeviceInfo2();
   }
   
   ngOnInit() {
@@ -86,6 +91,20 @@ export class HomeComponent {
     $('.expand-btn').css('display', 'block');
     $('.limitTestimonialText').removeClass('hide').addClass('block');
     $('.fullTestimonialText').removeClass('block').addClass('hide');
+  }
+
+  getDeviceInfo(){
+    if(this.deviceDetector.isDesktop()){
+      this.visibilityDesktop = true;
+      return (this.visibilityDesktop === true) ? 'block': 'hide';
+    }
+  }
+
+  getDeviceInfo2(){
+    if(this.deviceDetector.isMobile()){
+      this.visibilityMobile = true;
+      return(this.visibilityMobile === true) ? 'block': 'hide';
+    }
   }
 
   retrieveAbout(): void{

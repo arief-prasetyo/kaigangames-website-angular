@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
 <div class="container-fluid page-wrapper">
     <div class="canvas-wrapper">
-        <app-threejslogo></app-threejslogo>
+      <div class="canvas-wrapper">
+        <div class="desktop-mode" [ngStyle]="{display: getDeviceInfo()}" [ngClass]="{hide: visibilityDesktop === false, block: visibilityDesktop === true}">
+          <app-threejslogo></app-threejslogo>
+        </div>
+        <div class="mobile-mode"  [ngStyle]="{display: getDeviceInfo2()}" [ngClass]="{hide: visibilityMobile === false, block: visibilityMobile === true}">
+          <app-three-js-on-mobile></app-three-js-on-mobile>
+        </div>
+    </div>
     </div>
     <div class="container home-container" data-aos="fade-up" data-aos-duration="1500">
       <div class="about-wrapper">

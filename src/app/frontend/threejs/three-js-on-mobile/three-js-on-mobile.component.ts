@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 @Component({
-  selector: 'app-threejslogo',
-  templateUrl: './threejslogo.component.html',
-  styleUrls: ['./threejslogo.component.sass']
+  selector: 'app-three-js-on-mobile',
+  templateUrl: './three-js-on-mobile.component.html',
+  styleUrls: ['./three-js-on-mobile.component.sass']
 })
-export class ThreejslogoComponent {
+export class ThreeJsOnMobileComponent {
   loader = new GLTFLoader();
   canvasSizes: any;
 
@@ -17,7 +17,7 @@ export class ThreejslogoComponent {
   }
   
   createThreeJsBox(): void {
-    const canvas = document.getElementById('canvas');
+    const canvas = document.getElementById('canvas-mobile');
     //scene
     const scene = new THREE.Scene();
     //camera
@@ -68,7 +68,7 @@ export class ThreejslogoComponent {
         // if(window.innerWidth <= )
         // console.log(window.innerWidth);
         
-        gltf.scene.scale.set(5,8,5);
+        gltf.scene.scale.set(4,9,4);
         base = gltf.scene;
         scene.add(base); 
 

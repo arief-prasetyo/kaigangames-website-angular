@@ -8,18 +8,6 @@ const routes: Routes = [
    loadChildren: () => import('./frontend/pages/home/home.module').then(m => m.HomeModule),
    title: 'Welcome to Kaigan Games Official Website'
  },
- // { 
- //   path: '3dlogo', 
- //   loadChildren: () => import('./frontend/canvas/canvas-box/canvas-box.module').then(m => m.CanvasBoxModule) 
- // },
- // { 
- //   path: 'navbar', 
- //   loadChildren: () => import('./frontend/components/navbar/navbar.module').then(m => m.NavbarModule),
- // },
- // { 
- //   path: 'footer', 
- //   loadChildren: () => import('./frontend/components/footer/footer.module').then(m => m.FooterModule),
- // },
  { 
    path: 'about', 
    loadChildren: () => import('./frontend/pages/about/about.module').then(m => m.AboutModule),
